@@ -23,16 +23,22 @@
 		</ul>
 	</div></h5> 
 	<h1>Order Summary</h1>
-	<table>
-		<body>
-			<th>Product Id</th>
-			<th>Product Name</th>
-			<th>Quantity</th>
-			<th>Price</th>
-			<th>Subtotal</th>
-		</body>
-		</table>
+	<table border="1">
+		<thead>
+			<tr>
+				<th>Product Id</th>
+				<th>Product Name</th>
+				<th>Quantity</th>
+				<th>Price</th>
+				<th>Subtotal</th>
+			</tr>
+		</thead>
+		<tbody>
 <% 
+// Declare variables
+    String firstName = "";
+    String lastName = "";
+    int orderId = 0;
 // Get customer id
 String custId = request.getParameter("customerId");
 @SuppressWarnings({"unchecked"})
@@ -46,7 +52,7 @@ if (custId == null || custId.isEmpty()) {
 } else if (productList == null || productList.isEmpty()) {
     out.println("Your shopping cart is empty.");
 } else {
-	out.println("wwrog");
+	
 
 // Make connection
  try {
@@ -73,7 +79,7 @@ if (custId == null || custId.isEmpty()) {
 	int orderId = keys.getInt(1);
 	*/
 	
-	int orderId;
+	
         if (orderStmt.executeUpdate() > 0) {
             ResultSet generatedKeys = orderStmt.getGeneratedKeys();
             if (generatedKeys.next()) {
@@ -88,21 +94,33 @@ String insertOrderProductSQL = "INSERT INTO orderproduct (orderID, productID, qu
             PreparedStatement orderProductStmt = con.prepareStatement(insertOrderProductSQL);
 
             double totalAmount = 0;
-            for (ArrayList<Object> product : productList.values()) {
-                String productId = (String) product.get(0);
-    			String productName = (String) product.get(1);
-			
-				double quantity = Double.parseDouble((String) product.get(2)); 
-    			double price = Double.parseDouble(String.valueOf(product.get(3)));
-
-                orderProductStmt.setInt(1, orderId);
-   				orderProductStmt.setString(2, productId);
-   				orderProductStmt.setDouble(3, quantity);
-    			orderProductStmt.setDouble(4, price);
+            Iterator<Map.Entry<String, ArrayList<Object>>> iterator = productList.entrySet().iterator();
+				while (iterator.hasNext()) {
+					Map.Entry<String, ArrayList<Object>> entry = iterator.next();
+					ArrayList<Object> product = entry.getValue();
+					String productId = (String) product.get(0);
+					String productName = (String) product.get(1);
+					double quantity = Double.parseDouble((String) product.get(2));
+					double price = Double.parseDouble(String.valueOf(product.get(3)));
+					double subtotal = quantity * price;
+					
+					orderProductStmt.setInt(1, orderId);
+   					orderProductStmt.setString(2, productId);
+   					orderProductStmt.setDouble(3, quantity);
+    				orderProductStmt.setDouble(4, price);
 
                 if (orderProductStmt.executeUpdate() > 0) {
-                    totalAmount += quantity * price;
-                } else {
+                    totalAmount += subtotal;
+               
+					// Print out product details
+					out.println("<tr>");
+					out.println("<td>" + productId + "</td>");
+					out.println("<td>" + productName + "</td>");
+					out.println("<td>" + quantity + "</td>");
+					out.println("<td>" + price + "</td>");
+					out.println("<td>" + subtotal + "</td>");
+					out.println("</tr>");
+				} else {
                     // Handle insertion failure
                 }
             }
@@ -130,11 +148,19 @@ if (updateTotalStmt.executeUpdate() <= 0) {
             ...
 	}
 */
-
+String customerName = ""; // Initialize with an empty string
+String customerNameSQL = "SELECT firstName,lastName FROM customer WHERE customerID = ?";
+PreparedStatement customerNameStmt = con.prepareStatement(customerNameSQL);
+customerNameStmt.setString(1, custId);
+ResultSet customerNameResult = customerNameStmt.executeQuery();
+if (customerNameResult.next()) {
+	firstName = customerNameResult.getString("firstName");
+	lastName = customerNameResult.getString("lastName");
+}
 // Print out order summary
-out.println("Order ID: " + orderId + "<br>");
-out.println("Total Amount: $" + totalAmount);
-
+out.println("<p>Order completed. Will be shipped soon...</p>");
+out.println("<p>Your order reference number is: " + orderId + "</p>");
+out.println("<p>Shipping to customer: " + custId + " Name: " + firstName + " " + lastName + "</p>");
 
 // Clear cart if order placed successfully
 session.removeAttribute("productList");
@@ -149,7 +175,8 @@ session.removeAttribute("productList");
     }
 }
 %>
-
+</tbody>
+</table>
 </BODY>
 </HTML>
 
