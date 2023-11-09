@@ -62,6 +62,16 @@ if (custId == null || custId.isEmpty()) {
         String dbPass = "304#sa#pw";
         Connection con = DriverManager.getConnection(dbURL, dbUser, dbPass);
 
+// Check if customer ID is in database
+		String checkSQL = "SELECT customerID FROM customer WHERE customerID = ?";
+		PreparedStatement checkStmt = con.prepareStatement(checkSQL);
+		checkStmt.setString(1, custId);
+
+		ResultSet checkSet = checkStmt.executeQuery();
+		if (!checkSet.next()) {
+			response.sendRedirect("errorPage.jsp?message=Please enter a valid customer ID.");
+		}
+
         
 // Save order information to database
         String insertOrderSQL = "INSERT INTO ordersummary (customerID, totalAmount) VALUES (?, ?)";
