@@ -14,7 +14,7 @@
 	<h5> <div class="header">
               
 		<ul class="menu">
-			<header><a href="checkout.jsp">Checkout</a>
+			<header>
 			<a href="shop.html">Shop</a>
 			<a href="listprod.jsp">Product List</a>
 			<a href="listorder.jsp">Order List</a>
