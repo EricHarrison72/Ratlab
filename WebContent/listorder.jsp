@@ -84,17 +84,19 @@
             background-color: #ccc;
         }
 
-        /* Styles for the product sub-table */
-        .product-table {
-            width: 50%;
-            margin: 0 auto;
-            background-color: #dddddd;
-        }
+       /* Styles for the product sub-table */
+       .product-table {
+        width: 80%; /* Adjust the width as needed */
+        margin: 10px auto;
+        background-color: #dddddd;
+    }
 
-        .product-table th, .product-table td {
-            padding: 4px;
-            color: #333;
-        }
+    .product-table th, .product-table td {
+        padding: 4px;
+        color: #333;
+        font-size: 80%; /* Adjust the font size as needed */
+    }
+
     </style>
 </head>
 <body>
