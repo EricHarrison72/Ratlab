@@ -120,6 +120,7 @@ String insertOrderProductSQL = "INSERT INTO orderproduct (orderID, productID, qu
 					out.println("<td>" + price + "</td>");
 					out.println("<td>" + subtotal + "</td>");
 					out.println("</tr>");
+					out.println("<tr> Total Amount: $" + totalAmount+"</tr>");
 				} else {
                     // Handle insertion failure
                 }
@@ -158,6 +159,8 @@ if (customerNameResult.next()) {
 	lastName = customerNameResult.getString("lastName");
 }
 // Print out order summary
+
+out.println("Total Amount: $" + totalAmount);
 out.println("<p>Order completed. Will be shipped soon...</p>");
 out.println("<p>Your order reference number is: " + orderId + "</p>");
 out.println("<p>Shipping to customer: " + custId + " Name: " + firstName + " " + lastName + "</p>");
