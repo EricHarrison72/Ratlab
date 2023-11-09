@@ -9,18 +9,105 @@
 <html>
 <head>
 <title>Eric Grocery Order Processing</title>
+<style>
+	/* Add your styles here to make it prettier */
+	body {
+		font-family: Arial, sans-serif;
+		background-color: #f7f7f7;
+		margin: 0;
+		padding: 0;
+	}
+
+	.header {
+		background-color: #333;
+		color: #fff;
+		padding: 10px;
+		text-align: center;
+	}
+
+	.menu {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		overflow: hidden;
+	}
+
+	.menu li {
+		display: inline-block;
+		margin-right: 10px;
+	}
+
+	.menu a {
+		display: block;
+		color: #fff;
+		text-align: center;
+		padding: 14px 16px;
+		text-decoration: none;
+	}
+
+	.menu a:hover {
+		background-color: #ddd;
+		color: #333;
+	}
+
+	h1, h2 {
+		color: #333;
+	}
+
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		margin-top: 20px;
+	}
+
+	th, td {
+		border: 1px solid #ddd;
+		padding: 8px;
+		text-align: left;
+	}
+
+	th {
+		background-color: #333;
+		color: #fff;
+	}
+
+	input[type="text"] {
+		width: 40px;
+		text-align: center;
+	}
+
+	input[type="submit"] {
+		background-color: #333;
+		color: #fff;
+		padding: 8px 16px;
+		border: none;
+		cursor: pointer;
+	}
+
+	input[type="submit"]:hover {
+		background-color: #555;
+	}
+
+	a {
+		color: #333;
+		text-decoration: none;
+	}
+
+	a:hover {
+		color: #555;
+	}
+</style>
 </head>
 <body>
 	<h5> <div class="header">
               
 		<ul class="menu">
-			<header>
-			<a href="shop.html">Shop</a>
-			<a href="listprod.jsp">Product List</a>
-			<a href="listorder.jsp">Order List</a>
-			<a href="showcart.jsp">Cart</a>
-			<a href="checkout.jsp">Checkout</a></header> <!-- Add a link to the shop page -->
-		</ul>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="listprod.jsp">Product List</a></li>
+            <li><a href="listorder.jsp">Order List</a></li>
+            <li><a href="showcart.jsp">Cart</a></li>
+            <li><a href="checkout.jsp">Checkout</a></li>
+        </ul>
 	</div></h5> 
 	<h1>Order Summary</h1>
 	<table border="1">

@@ -1,18 +1,64 @@
 <%@ page import="java.sql.*" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eric Harrison's Grocery Order List</title>
     <style>
         body {
-            background-color: #cccccca4; /* Grey background for the entire page */
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .menu {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .menu li {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .menu a {
+            display: block;
+            color: #fff;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .menu a:hover {
+            background-color: #ddd;
+            color: #333;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            background-color: #cccccc;
+            padding: 10px;
+            margin: 0;
         }
 
         table {
             border-collapse: collapse;
             width: 100%;
-            background-color: #0073e66e; /* Blue background for the main table */
+            background-color: #cccccc;
         }
 
         table, th, td {
@@ -22,46 +68,46 @@
         th, td {
             padding: 8px;
             text-align: left;
-            color: white; /* White text color for table headers and cells */
+            color: #333;
         }
 
         th {
-            background-color: #0058b07d; /* Dark blue background for table headers */
+            background-color: #666;
+            color: #fff;
         }
 
         tr:nth-child(even) {
-            background-color: #6eaed0; /* Light blue background for even rows */
+            background-color: #ddd;
         }
 
         tr:nth-child(odd) {
-            background-color: #618bb5; /* Blue background for odd rows */
+            background-color: #ccc;
         }
 
         /* Styles for the product sub-table */
         .product-table {
             width: 50%;
             margin: 0 auto;
-            background-color: #00a6ffab; /* Light blue background for the sub-table */
+            background-color: #dddddd;
         }
 
         .product-table th, .product-table td {
             padding: 4px;
-            color: white;
+            color: #333;
         }
     </style>
 </head>
 <body>
-    <h5> <div class="header">
-              
+    <div class="header">
         <ul class="menu">
-            <header>
-            <a href="shop.html">Shop</a>
-            <a href="listprod.jsp">Product List</a>
-            <a href="listorder.jsp">Order List</a>
-            <a href="showcart.jsp">Cart</a>
-            <a href="checkout.jsp">Checkout</a></header> <!-- Add a link to the shop page -->
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="listprod.jsp">Product List</a></li>
+            <li><a href="listorder.jsp">Order List</a></li>
+            <li><a href="showcart.jsp">Cart</a></li>
+            <li><a href="checkout.jsp">Checkout</a></li>
         </ul>
-    </div></h5> 
+    </div>
+
 <h1>Order List</h1>
 
 <%

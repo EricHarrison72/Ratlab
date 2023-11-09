@@ -8,21 +8,107 @@
 <html>
 <head>
     <title>Your Shopping Cart</title>
+    <style>
+        /* Add your styles here to make it prettier */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .menu {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .menu li {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .menu a {
+            display: block;
+            color: #fff;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .menu a:hover {
+            background-color: #ddd;
+            color: #333;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #333;
+            color: #fff;
+        }
+
+        input[type="text"] {
+            width: 40px;
+            text-align: center;
+        }
+
+        input[type="submit"] {
+            background-color: #333;
+            color: #fff;
+            padding: 8px 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #555;
+        }
+
+        a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #555;
+        }
+    </style>
 </head>
 <body>
-    <h5>
-        <div class="header">
-            <ul class="menu">
-                <header>
-                    <a href="shop.html">Shop</a>
-                    <a href="listprod.jsp">Product List</a>
-                    <a href="listorder.jsp">Order List</a>
-                    <a href="showcart.jsp">Cart</a>
-                    <a href="checkout.jsp">Checkout</a>
-                </header>
-            </ul>
-        </div>
-    </h5>
+    <div class="header">
+        <ul class="menu">
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="listprod.jsp">Product List</a></li>
+            <li><a href="listorder.jsp">Order List</a></li>
+            <li><a href="showcart.jsp">Cart</a></li>
+            <li><a href="checkout.jsp">Checkout</a></li>
+        </ul>
+    </div>
+
+    <h1>Your Shopping Cart</h1>
 
     <%
         // Get the current list of products
@@ -35,7 +121,6 @@
         } else {
             NumberFormat currFormat = NumberFormat.getCurrencyInstance();
 
-            out.println("<h1>Your Shopping Cart</h1>");
             out.print("<form method='post' action='updateCart.jsp'>");
             out.print("<table><tr><th>Product Id</th><th>Product Name</th><th>Quantity</th>");
             out.println("<th>Price</th><th>Subtotal</th><th>Remove</th></tr>");
@@ -46,13 +131,13 @@
                 Map.Entry<String, ArrayList<Object>> entry = iterator.next();
                 ArrayList<Object> product = (ArrayList<Object>) entry.getValue();
                 if (product.size() < 4) {
-                    out.println("Expected product with four entries. Got: " + product);
+                    out.println("<tr><td colspan='6'>Expected product with four entries. Got: " + product + "</td></tr>");
                     continue;
                 }
 
                 out.print("<tr><td>" + product.get(0) + "</td>");
                 out.print("<td>" + product.get(1) + "</td>");
-                out.print("<td align=\"center\"><input type='text' name='quantity_" + product.get(0) + "' value='" + product.get(3) + "'></td>");
+                out.print("<td align='center'><input type='text' name='quantity_" + product.get(0) + "' value='" + product.get(3) + "'></td>");
                 Object price = product.get(2);
                 Object itemqty = product.get(3);
                 double pr = 0;
@@ -61,29 +146,31 @@
                 try {
                     pr = Double.parseDouble(price.toString());
                 } catch (Exception e) {
-                    out.println("Invalid price for product: " + product.get(0) + " price: " + price);
+                    out.println("<td colspan='3'>Invalid price for product: " + product.get(0) + " price: " + price + "</td></tr>");
+                    continue;
                 }
                 try {
                     qty = Integer.parseInt(itemqty.toString());
                 } catch (Exception e) {
-                    out.println("Invalid quantity for product: " + product.get(0) + " quantity: " + qty);
+                    out.println("<td colspan='3'>Invalid quantity for product: " + product.get(0) + " quantity: " + qty + "</td></tr>");
+                    continue;
                 }
 
-                out.print("<td align=\"right\">" + currFormat.format(pr) + "</td>");
-                out.print("<td align=\"right\">" + currFormat.format(pr * qty) + "</td>");
-                out.print("<td align=\"center\"><a href='removecart.jsp?productId=" + product.get(0) + "'>Remove</a></td></tr>");
-                total = total + pr * qty;
+                out.print("<td align='right'>" + currFormat.format(pr) + "</td>");
+                out.print("<td align='right'>" + currFormat.format(pr * qty) + "</td>");
+                out.print("<td align='center'><a href='removecart.jsp?productId=" + product.get(0) + "'>Remove</a></td></tr>");
+                total += pr * qty;
             }
-            out.println("<tr><td colspan=\"4\" align=\"right\"><b>Order Total</b></td>"
-                    + "<td align=\"right\">" + currFormat.format(total) + "</td><td></td></tr>");
+            out.println("<tr><td colspan='4' align='right'><b>Order Total</b></td>"
+                    + "<td align='right'>" + currFormat.format(total) + "</td><td></td></tr>");
             out.println("</table>");
             out.println("<input type='submit' value='Update Cart'>");
             out.println("</form>");
 
-            out.println("<h2><a href=\"checkout.jsp\">Check Out</a></h2>");
+            out.println("<h2><a href='checkout.jsp'>Check Out</a></h2>");
         }
     %>
 
-    <h2><a href="listprod.jsp">Continue Shopping</a></h2>
+    <h2><a href='listprod.jsp'>Continue Shopping</a></h2>
 </body>
 </html>
