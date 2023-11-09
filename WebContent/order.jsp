@@ -120,7 +120,6 @@ String insertOrderProductSQL = "INSERT INTO orderproduct (orderID, productID, qu
 					out.println("<td>" + price + "</td>");
 					out.println("<td>" + subtotal + "</td>");
 					out.println("</tr>");
-					out.println("<tr> Total Amount: $" + totalAmount+"</tr>");
 				} else {
                     // Handle insertion failure
                 }
