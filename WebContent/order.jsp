@@ -48,9 +48,9 @@ HashMap<String, ArrayList<Object>> productList = (HashMap<String, ArrayList<Obje
 // Determine if there are products in the shopping cart
 // If either are not true, display an error message
 if (custId == null || custId.isEmpty()) {
-    out.println("Please enter a valid customer ID.");
+	response.sendRedirect("errorPage.jsp?message=Please enter a valid customer ID.");
 } else if (productList == null || productList.isEmpty()) {
-    out.println("Your shopping cart is empty.");
+	response.sendRedirect("errorPage.jsp?message=Your shopping cart is empty.");
 } else {
 	
 
