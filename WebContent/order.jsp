@@ -203,8 +203,8 @@ String insertOrderProductSQL = "INSERT INTO orderproduct (orderID, productID, qu
 					
 					orderProductStmt.setInt(1, orderId);
    					orderProductStmt.setString(2, productId);
-   					orderProductStmt.setDouble(3, quantity);
-    				orderProductStmt.setDouble(4, price);
+   					orderProductStmt.setDouble(3, price);		
+    				orderProductStmt.setDouble(4, quantity);		//Price and quantity are swapped for some reason
 
                 if (orderProductStmt.executeUpdate() > 0) {
                     totalAmount += subtotal;
@@ -239,9 +239,9 @@ if (updateTotalStmt.executeUpdate() <= 0) {
 		Map.Entry<String, ArrayList<Object>> entry = iterator.next();
 		ArrayList<Object> product = (ArrayList<Object>) entry.getValue();
 		String productId = (String) product.get(0);
-        String price = (String) product.get(2);
+        String price = (String) product.get(3);
 		double pr = Double.parseDouble(price);
-		int qty = ( (Integer)product.get(3)).intValue();
+		int qty = ( (Integer)product.get(2)).intValue();
             ...
 	}
 */
