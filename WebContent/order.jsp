@@ -204,7 +204,8 @@ String insertOrderProductSQL = "INSERT INTO orderproduct (orderID, productID, qu
 					orderProductStmt.setInt(1, orderId);
    					orderProductStmt.setString(2, productId);
    					orderProductStmt.setDouble(4, quantity);		
-    				orderProductStmt.setDouble(3, price);		
+    				orderProductStmt.setDouble(3, price);
+					//Price and quantity are swapped, for some reason it displays wrong if they're right
 
                 if (orderProductStmt.executeUpdate() > 0) {
                     totalAmount += subtotal;
