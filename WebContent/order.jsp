@@ -203,8 +203,8 @@ String insertOrderProductSQL = "INSERT INTO orderproduct (orderID, productID, qu
 					
 					orderProductStmt.setInt(1, orderId);
    					orderProductStmt.setString(2, productId);
-   					orderProductStmt.setDouble(3, price);		
-    				orderProductStmt.setDouble(4, quantity);		//Price and quantity are swapped for some reason
+   					orderProductStmt.setDouble(4, quantity);		
+    				orderProductStmt.setDouble(3, price);		
 
                 if (orderProductStmt.executeUpdate() > 0) {
                     totalAmount += subtotal;
@@ -213,8 +213,8 @@ String insertOrderProductSQL = "INSERT INTO orderproduct (orderID, productID, qu
 					out.println("<tr>");
 					out.println("<td>" + productId + "</td>");
 					out.println("<td>" + productName + "</td>");
-					out.println("<td>" + quantity + "</td>");
 					out.println("<td>" + price + "</td>");
+					out.println("<td>" + quantity + "</td>");
 					out.println("<td>" + subtotal + "</td>");
 					out.println("</tr>");
 				} else {
