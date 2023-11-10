@@ -215,8 +215,8 @@ String insertOrderProductSQL = "INSERT INTO orderproduct (orderID, productID, qu
 					out.println("<td>" + productId + "</td>");
 					out.println("<td>" + productName + "</td>");
 					out.println("<td>" + price + "</td>");
-					out.println("<td>" + quantity + "</td>");
-					out.println("<td>" + subtotal + "</td>");
+					out.println("<td>" + "$" + quantity + "</td>"); //$ in front of quantity because it's swapped with price
+					out.println("<td>" + "$" + subtotal + "</td>");
 					out.println("</tr>");
 				} else {
                     // Handle insertion failure
