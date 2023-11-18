@@ -152,13 +152,15 @@
                 String productName = rs.getString("productName");
                 double productPrice = rs.getDouble("productPrice");
 
+                // Create a link to go to the product detail page
+                String productDetailLink = "product.jsp?id=" + productId;
                 // Create a link to add the product to the cart
                 String addCartLink = "addcart.jsp?id=" + productId + "&name=" + URLEncoder.encode(productName, "UTF-8") + "&price=" + productPrice;
     %>
                 <!-- For each product, create a link to add it to the cart -->
                 <div class="product-info">
                     <p>
-                        Product Name: <%= productName %><br>
+                        Product Name: <a class="product-link" href="<%= productDetailLink %>"><%= productName %></a><br>
                         Price: <%= productPrice %><br>
                         <a class="product-link" href="<%= addCartLink %>">Add to Cart</a>
                     </p>
