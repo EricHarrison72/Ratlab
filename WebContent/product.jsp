@@ -10,6 +10,16 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+    <div class="header">
+        <ul class="menu">
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="listprod.jsp">Product List</a></li>
+            <li><a href="listorder.jsp">Order List</a></li>
+            <li><a href="showcart.jsp">Cart</a></li>
+            <li><a href="login.jsp">Login</a></li>
+            <li><a href="checkout.jsp">Checkout</a></li>
+        </ul>
+    </div>
 <%
     String dbURL = "jdbc:sqlserver://cosc304_sqlserver:1433;DatabaseName=orders;TrustServerCertificate=True";
     String dbUser = "sa";

@@ -4,6 +4,16 @@
 <title>Login Screen</title>
 </head>
 <body>
+	<div class="header">
+        <ul class="menu">
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="listprod.jsp">Product List</a></li>
+            <li><a href="listorder.jsp">Order List</a></li>
+            <li><a href="showcart.jsp">Cart</a></li>
+            <li><a href="login.jsp">Login</a></li>
+            <li><a href="checkout.jsp">Checkout</a></li>
+        </ul>
+    </div>
 
 <div style="margin:0 auto;text-align:center;display:inline">
 
