@@ -28,7 +28,7 @@ try
 	stmt.setInt(1,idVal);
 	ResultSet rst = stmt.executeQuery();		
 
-	int BUFFER_SIZE = 10000;
+	int BUFFER_SIZE = 20000;
 	byte[] data = new byte[BUFFER_SIZE];
 
 	if (rst.next())

@@ -109,7 +109,9 @@
                 <%-- Display product image using productImageURL --%>
             <img src="<%= productImageURL %>" alt="<%= productName %>" class="img-fluid">
 
-            <%-- Add links to "Add to Cart" and "Continue Shopping" --%>
+            <%-- binary field (productImage) using displayImage.jsp --%>
+            <img src="displayImage.jsp?id=<%= productId %>" alt="<%= productName %>" class="img-fluid">
+                <%-- Add links to "Add to Cart" and "Continue Shopping" --%>
                 <p>
                     <a href="addcart.jsp?id=<%= productId %>&name=<%= URLEncoder.encode(productName, "UTF-8") %>&price=<%= productPrice %>">Add to Cart</a>
                     | <a href="listprod.jsp">Continue Shopping</a>
