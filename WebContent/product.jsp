@@ -38,6 +38,7 @@
             String productName = rs.getString("productName");
             double productPrice = rs.getDouble("productPrice");
             String productDescription = rs.getString("productDesc");
+            String productImageURL = rs.getString("productImageURL");
 
             // Display product details
 %>
@@ -45,7 +46,10 @@
                 <h2><%= productName %></h2>
                 <p>Price: <%= NumberFormat.getCurrencyInstance().format(productPrice) %></p>
                 <p>Description: <%= productDescription %></p>
+                <%-- Display product image using productImageURL --%>
+            <img src="<%= productImageURL %>" alt="<%= productName %>" class="img-fluid">
 
+            
                 <%-- Add links to "Add to Cart" and "Continue Shopping" --%>
                 <p>
                     <a href="addcart.jsp?id=<%= productId %>&name=<%= URLEncoder.encode(productName, "UTF-8") %>&price=<%= productPrice %>">Add to Cart</a>
