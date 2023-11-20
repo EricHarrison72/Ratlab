@@ -19,13 +19,15 @@ DROP TABLE users;
 DROP TABLE admins;
 
 CREATE TABLE users (
-    userID INT PRIMARY KEY,
-    username VARCHAR(50) UNIQUE NOT NULL,
-    password VARCHAR(50) NOT NULL
+    userId VARCHAR(20),
+    password VARCHAR(30),
+    
 );
 
-CREATE TABLE admins (
-    AdminID INT PRIMARY KEY,
+CREATE TABLE admin (
+    adminId VARCHAR(255),
+    password VARCHAR(255),
+    PRIMARY KEY (adminId)
 );
 
 CREATE TABLE customer (
@@ -243,8 +245,13 @@ INSERT INTO orderproduct (orderId, productId, quantity, price) VALUES (@orderId,
 INSERT INTO orderproduct (orderId, productId, quantity, price) VALUES (@orderId, 19, 2, 81)
 INSERT INTO orderproduct (orderId, productId, quantity, price) VALUES (@orderId, 20, 3, 10);
 
-INSERT INTO users (userID, username, password)
-VALUES (1,'admin', 'password');
+INSERT INTO admin (admin_id, password) VALUES ('admin', 'pa');
+
+INSERT INTO users (user_id, password)
+SELECT userid, password FROM customer;
+INSERT INTO users (user_id, password)
+SELECT adminid, password FROM admin;
+
 GRANT SELECT, INSERT, UPDATE, DELETE ON admins TO admin;
 -- New SQL DDL for lab 8
 UPDATE Product SET productImageURL = 'img/1.jpg' WHERE productId = 1;

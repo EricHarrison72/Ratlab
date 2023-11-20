@@ -1,66 +1,72 @@
 <%@ page language="java" import="java.io.*,java.sql.*"%>
 <%@ include file="jdbc.jsp" %>
 <%
-	String authenticatedUser = null;
-	session = request.getSession(true);
+    String authenticatedUser = null;
+    session = request.getSession(true);
 
-	try
-	{
-		authenticatedUser = validateLogin(out,request,session);
-	}
-	catch(IOException e)
-	{	System.err.println(e); }
+    try {
+        authenticatedUser = validateLogin(out, request, session);
+    } catch (IOException e) {
+        // Handle the exception appropriately, e.g., log it
+        e.printStackTrace();
+    }
 
-	if(authenticatedUser != null)
-		response.sendRedirect("index.jsp");		// Successful login
-	else
-		response.sendRedirect("login.jsp");		// Failed login - redirect back to login page with a message 
+    if (authenticatedUser != null) {
+        response.sendRedirect("index.jsp"); // Successful login
+    } else {
+        response.sendRedirect("login.jsp"); // Failed login - redirect back to login page with a message
+    }
 %>
 
-
 <%!
-	String validateLogin(JspWriter out,HttpServletRequest request, HttpSession session) throws IOException
-	{
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-		String retStr = null;
+    String validateLogin(JspWriter out, HttpServletRequest request, HttpSession session) throws IOException {
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String retStr = null;
 
-		if(username == null || password == null)
-				return null;
-		if((username.length() == 0) || (password.length() == 0))
-				return null;
+        if (username == null || password == null)
+            return null;
+        if ((username.length() == 0) || (password.length() == 0))
+            return null;
 
-		try 
-		{
-			getConnection();
-			
-			// TODO: Check if userId and password match some customer account. If so, set retStr to be the username.
-			String sql = "SELECT username FROM users WHERE username = ? AND password = ?";
-            PreparedStatement pstmt = con.prepareStatement(sql);
-            pstmt.setString(1, username);
-            pstmt.setString(2, password);
-            ResultSet rs = pstmt.executeQuery();
+        try {
+            getConnection();
 
-            if (rs.next()) {
-                retStr = rs.getString("username");
-            }		
-		} 
-		catch (SQLException ex) {
-			out.println(ex);
-		}
-		finally
-		{
-			closeConnection();
-		}	
-		
-		if(retStr != null)
-		{	session.removeAttribute("loginMessage");
-			session.setAttribute("authenticatedUser",username);
-		}
-		else
-			session.setAttribute("loginMessage","Could not connect to the system using that username/password.");
+            // Check if username and password match some user account
+            String userSql = "SELECT user_id FROM users WHERE user_id = ? AND password = ?";
+            PreparedStatement userPstmt = con.prepareStatement(userSql);
+            userPstmt.setString(1, username);
+            userPstmt.setString(2, password);
+            ResultSet userRs = userPstmt.executeQuery();
 
-		return retStr;
-	}
+            if (userRs.next()) {
+                retStr = userRs.getString("user_id");
+
+                // Check if the user is a customer
+                String customerSql = "SELECT userid FROM customer WHERE userid = ?";
+                PreparedStatement customerPstmt = con.prepareStatement(customerSql);
+                customerPstmt.setString(1, retStr);
+                ResultSet customerRs = customerPstmt.executeQuery();
+
+                if (customerRs.next()) {
+                    // User is a customer
+                    session.removeAttribute("loginMessage");
+                    session.setAttribute("authenticatedUser", retStr);
+                    out.println("<script>window.location.href='customer.jsp';</script>"); // Redirect to customer page
+                } else {
+                    // User is an admin
+                    out.println("<script>window.location.href='admin.jsp';</script>"); // Redirect to admin page
+                }
+            } else {
+                session.setAttribute("loginMessage", "Invalid username/password.");
+            }
+        } catch (SQLException ex) {
+            out.println(ex);
+        } finally {
+            closeConnection();
+        }
+
+        return retStr;
+    }
 %>
 
