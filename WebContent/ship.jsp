@@ -9,7 +9,57 @@
 
 <html>
 <head>
-<title>YOUR NAME Grocery Shipment Processing</title>
+<title>Eric's Rat Grocery Shipment Processing</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f7f7f7;
+        margin: 0;
+        padding: 0;
+    }
+
+    .header {
+        background-color: #333;
+        color: #fff;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .menu {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+    }
+
+    .menu li {
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    .menu a {
+        display: block;
+        color: #fff;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    .menu a:hover {
+        background-color: #ddd;
+        color: #333;
+    }
+
+    .main-content {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    h1, h2 {
+        color: #333;
+    }
+</style>
 </head>
 <body>
     <div class="header">
@@ -22,8 +72,6 @@
             <li><a href="checkout.jsp">Checkout</a></li>
         </ul>
     </div>
-        
-    <%@ include file="header.jsp" %>
 
     <%
     // Database connection details
