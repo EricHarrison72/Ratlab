@@ -107,7 +107,7 @@ try {
     %>
     <tr>
         <td><%= orderDay %></td>
-        <td><%= totalSales %></td>
+        <td><%= "$" +  totalSales %></td>
     </tr>
     <%
         }
