@@ -22,7 +22,10 @@ String sql = "SELECT productImage FROM Product P  WHERE productId = ?";
 
 try 
 {
-	getConnection();
+	String dbURL = "jdbc:sqlserver://cosc304_sqlserver:1433;DatabaseName=orders;TrustServerCertificate=True";
+    String dbUser = "sa";
+    String dbPass = "304#sa#pw";
+    Connection con = DriverManager.getConnection(dbURL, dbUser, dbPass);
 
 	PreparedStatement stmt = con.prepareStatement(sql);
 	stmt.setInt(1,idVal);
