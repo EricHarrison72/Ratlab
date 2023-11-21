@@ -85,19 +85,15 @@
         </ul>
     </div>
 
-    <%-- Check if the user is logged in --%>
+   
     <% 
-      authenticated = session.getAttribute("authenticatedUser") != null;
-    %>
-
-    <%-- Display error message if not logged in --%>
-    <% 
+    authenticated = session.getAttribute("authenticatedUser") == null ? false : true;
         if (!authenticated) {
-            out.println("<p>Error: You are not logged in. Please <a href='login.jsp'>login</a> to access this page.</p>");
-        } else {
-            // Retrieve authenticated username
-            String userName = (String) session.getAttribute("authenticatedUser");
-
+            String loginMessage = "You have not been authorized to access the URL " + request.getRequestURL().toString();
+            session.setAttribute("loginMessage", loginMessage);
+            response.sendRedirect("login.jsp");   } else {
+         String currentUser = (String) session.getAttribute("authenticatedUser");
+           
             // TODO: Retrieve and display customer information by username
             String sql = "SELECT * FROM Customer WHERE userId = ?";
 
@@ -109,7 +105,7 @@
                 Connection con = DriverManager.getConnection(dbURL, dbUser, dbPass);
 
                 PreparedStatement pstmt = con.prepareStatement(sql);
-                pstmt.setString(1, userName);
+                pstmt.setString(1, currentUser);
                 ResultSet rs = pstmt.executeQuery();
 
                 if (rs.next()) {
@@ -128,7 +124,7 @@
 					out.println("<tr><td>Username</td><td>" + rs.getString("userid") + "</td></tr>");
                     out.println("</table>");
                 } else {
-                    out.println("<p>Error: Customer information not found for user " + userName + "</p>");
+                    out.println("<p>Error: Customer information not found for user " + currentUser + "</p>");
                 }
 
             } catch (SQLException e) {
