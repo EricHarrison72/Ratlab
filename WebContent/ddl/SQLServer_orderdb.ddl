@@ -233,8 +233,6 @@ INSERT INTO orderproduct (orderId, productId, quantity, price) VALUES (@orderId,
 INSERT INTO orderproduct (orderId, productId, quantity, price) VALUES (@orderId, 19, 2, 81)
 INSERT INTO orderproduct (orderId, productId, quantity, price) VALUES (@orderId, 20, 3, 10);
 
-INSERT INTO customer (firstName, lastName, email, phonenum, address, city, state, postalCode, country, userid, password, isAdmin) 
-VALUES ('Admin', 'Admin', 'admin@example.com', '123-456-7890', '123 Admin Street', 'AdminCity', 'AdminState', '12345', 'AdminCountry', 'admin', 'adminpassword', TRUE);
 
 -- New SQL DDL for lab 8
 UPDATE Product SET productImageURL = 'img/1.jpg' WHERE productId = 1;
