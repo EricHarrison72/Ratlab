@@ -87,7 +87,7 @@
 
     <%-- Check if the user is logged in --%>
     <% 
-        authenticated = session.getAttribute("authenticatedUser") != null;
+      authenticated = session.getAttribute("authenticatedUser") != null;
     %>
 
     <%-- Display error message if not logged in --%>
