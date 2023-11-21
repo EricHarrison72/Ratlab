@@ -78,24 +78,19 @@ if (!authenticated)
  } else {
         String currentUser = (String) session.getAttribute("authenticatedUser");
    
-}
-%>
-<%
-    // Define the getConnection() method
-    Connection getConnection() throws SQLException {
+
+// Write SQL query to print out total order amount by day
+String sql = "SELECT (orderDate) AS orderDay, SUM(totalAmount) AS totalSales "
+           + "FROM ordersummary "
+           + "GROUP BY (orderDate)";
+try {
+    
+ 
         String dbURL = "jdbc:sqlserver://cosc304_sqlserver:1433;DatabaseName=orders;TrustServerCertificate=True";
         String dbUser = "sa";
         String dbPass = "304#sa#pw";
-        return DriverManager.getConnection(dbURL, dbUser, dbPass);
-    }
-%>
-<%
-// Write SQL query to print out total order amount by day
-String sql = "SELECT DATE(orderDate) AS orderDay, SUM(totalAmount) AS totalSales "
-           + "FROM Orders "
-           + "GROUP BY DATE(orderDate)";
-try {
-    getConnection();
+        Connection con = DriverManager.getConnection(dbURL, dbUser, dbPass);
+    
     PreparedStatement stmt = con.prepareStatement(sql);
     ResultSet rs = stmt.executeQuery();
 %>
@@ -122,9 +117,8 @@ try {
 <%
 } catch (SQLException ex) {
     out.println("Error retrieving total sales: " + ex.getMessage());
-} finally {
-    closeConnection();
-}
+} 
+ }
 %>
 
 </body>
