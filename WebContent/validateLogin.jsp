@@ -43,6 +43,9 @@
                     try (ResultSet userRs = userPstmt.executeQuery()) {
                         if (userRs.next()) {
                             retStr = userRs.getString("userid");
+                            boolean isAdmin = userRs.getBoolean("isAdmin");
+                            session.setAttribute("isAdmin", isAdmin); // Store admin status in the session
+                        
                         }
                     }
                 }

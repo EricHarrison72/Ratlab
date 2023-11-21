@@ -66,12 +66,7 @@
         </ul>
     </div>
 
-    <h1>Welcome, <%= currentUser %>!</h1>
-<%
-// TODO: Include files auth.jsp and jdbc.jsp
-<%@ include file="auth.jsp" %>
-<%@ include file="jdbc.jsp" %>
-
+    
 <%
 boolean authenticated = session.getAttribute("authenticatedUser") == null ? false : true;
 
@@ -79,9 +74,20 @@ if (!authenticated)
 {
     String loginMessage = "You have not been authorized to access the URL " + request.getRequestURL().toString();
     session.setAttribute("loginMessage", loginMessage);
-    response.sendRedirect("login.jsp");
+    response.sendRedirect("login.jsp"); 
+ } else {
+        String currentUser = (String) session.getAttribute("authenticatedUser");
+   
 }
 %>
+<%
+    // Define the getConnection() method
+    Connection getConnection() throws SQLException {
+        String dbURL = "jdbc:sqlserver://cosc304_sqlserver:1433;DatabaseName=orders;TrustServerCertificate=True";
+        String dbUser = "sa";
+        String dbPass = "304#sa#pw";
+        return DriverManager.getConnection(dbURL, dbUser, dbPass);
+    }
 %>
 <%
 // Write SQL query to print out total order amount by day
