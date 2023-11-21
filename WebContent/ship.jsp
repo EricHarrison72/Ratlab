@@ -107,9 +107,28 @@ try {
         // Retrieve all items in the order with the given id
         // Change to a scrollable result set to support moving the cursor backward
         // Declare itemStatement outside the try block
-        itemStatement = connection.prepareStatement("SELECT * FROM orderproduct WHERE orderId = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        itemStatement = connection.prepareStatement("SELECT orderproduct.productId, orderproduct.quantity AS order_quantity, productinventory.quantity AS inventory_quantity FROM orderproduct JOIN productinventory ON orderproduct.productId = productinventory.productId WHERE orderId = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         itemStatement.setInt(1, orderId);
         itemResult = itemStatement.executeQuery();
+
+       boolean suc = true;
+        while (itemResult.next()) {
+            int prodId = itemResult.getInt("productId");
+            int qty = itemResult.getInt("order_quantity");
+            int inv = itemResult.getInt("inventory_quantity");
+            int newInv = inv-qty;
+            if(newInv >= 0) {
+                out.print("<p>Ordered product: " + prodId + " Qty: " + qty + " Previous Inventory: " + inv + " New inventory: " + newInv + "</p>");
+            } else {
+                out.println("<h2>Shipment not done. Insufficient inventory for product id: " + prodId + "</h2>");
+                suc = false;
+            }
+        }
+
+        if(suc) {
+            out.print("<h2>Shipment successfully processed</h2>");
+        }
+        
 
         // Rest of your existing code remains unchanged
 
@@ -124,6 +143,7 @@ try {
         insertShipmentStatement.setInt(3, 1); // Assuming warehouseId 1 for now
 
         // Rest of your existing code remains unchanged
+        
 
         // Close resources
         if (insertShipmentStatement != null) {
