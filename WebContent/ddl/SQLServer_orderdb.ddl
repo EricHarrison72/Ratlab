@@ -15,20 +15,7 @@ DROP TABLE category;
 DROP TABLE ordersummary;
 DROP TABLE paymentmethod;
 DROP TABLE customer;
-DROP TABLE users;
-DROP TABLE admins;
 
-CREATE TABLE users (
-    userId VARCHAR(20),
-    password VARCHAR(30),
-    
-);
-
-CREATE TABLE admin (
-    adminId VARCHAR(255),
-    password VARCHAR(255),
-    PRIMARY KEY (adminId)
-);
 
 CREATE TABLE customer (
     customerId          INT IDENTITY,
@@ -245,14 +232,6 @@ INSERT INTO orderproduct (orderId, productId, quantity, price) VALUES (@orderId,
 INSERT INTO orderproduct (orderId, productId, quantity, price) VALUES (@orderId, 19, 2, 81)
 INSERT INTO orderproduct (orderId, productId, quantity, price) VALUES (@orderId, 20, 3, 10);
 
-INSERT INTO admin (admin_id, password) VALUES ('admin', 'pa');
-
-INSERT INTO users (user_id, password)
-SELECT userid, password FROM customer;
-INSERT INTO users (user_id, password)
-SELECT adminid, password FROM admin;
-
-GRANT SELECT, INSERT, UPDATE, DELETE ON admins TO admin;
 -- New SQL DDL for lab 8
 UPDATE Product SET productImageURL = 'img/1.jpg' WHERE productId = 1;
 UPDATE Product SET productImageURL = 'img/2.jpg' WHERE productId = 2;
