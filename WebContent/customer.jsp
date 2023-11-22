@@ -117,7 +117,7 @@
                     out.println("<tr><td>Email</td><td>" + rs.getString("Email") + "</td></tr>");
                     out.println("<tr><td>Phone</td><td>" + rs.getString("PhoneNum") + "</td></tr>");
                     out.println("<tr><td>Address</td><td>" + rs.getString("Address") + "</td></tr>");
-					out.println("<tr><td>Sity</td><td>" + rs.getString("city") + "</td></tr>");
+					out.println("<tr><td>City</td><td>" + rs.getString("city") + "</td></tr>");
 					out.println("<tr><td>State</td><td>" + rs.getString("state") + "</td></tr>");
 					out.println("<tr><td>Postal Code</td><td>" + rs.getString("postalCode") + "</td></tr>");
 					out.println("<tr><td>Country</td><td>" + rs.getString("Country") + "</td></tr>");

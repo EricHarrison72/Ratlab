@@ -128,23 +128,14 @@ try {
         if(suc) {
             out.print("<h2>Shipment successfully processed</h2>");
         }
-        
-
-        // Rest of your existing code remains unchanged
-
-        // Close itemResult when it is no longer needed
-        // ...
-
+       
         // Create a new shipment record
         String insertShipmentQuery = "INSERT INTO shipment (shipmentDate, shipmentDesc, warehouseId) VALUES (?, ?, ?)";
         insertShipmentStatement = connection.prepareStatement(insertShipmentQuery, Statement.RETURN_GENERATED_KEYS);
         insertShipmentStatement.setTimestamp(1, new Timestamp(System.currentTimeMillis())); // Set the current timestamp as shipmentDate
         insertShipmentStatement.setString(2, "Shipment for Order #" + orderId);
         insertShipmentStatement.setInt(3, 1); // Assuming warehouseId 1 for now
-
-        // Rest of your existing code remains unchanged
         
-
         // Close resources
         if (insertShipmentStatement != null) {
             insertShipmentStatement.close();
