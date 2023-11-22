@@ -64,6 +64,7 @@
 <body>
     <div class="header">
         <ul class="menu">
+            <img src="img/rat.png" width = "70" height = "50" alt="Rat">
             <li><a href="index.jsp">Shop</a></li>
             <li><a href="listprod.jsp">Product List</a></li>
             <li><a href="listorder.jsp">Order List</a></li>
@@ -135,7 +136,7 @@ try {
         insertShipmentStatement.setTimestamp(1, new Timestamp(System.currentTimeMillis())); // Set the current timestamp as shipmentDate
         insertShipmentStatement.setString(2, "Shipment for Order #" + orderId);
         insertShipmentStatement.setInt(3, 1); // Assuming warehouseId 1 for now
-        
+
         // Close resources
         if (insertShipmentStatement != null) {
             insertShipmentStatement.close();

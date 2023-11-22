@@ -100,6 +100,7 @@
 <body>
     <div class="header">
         <ul class="menu">
+            <img src="img/rat.png" width = "70" height = "50" alt="Rat">
             <li><a href="index.jsp">Shop</a></li>
             <li><a href="listprod.jsp">Product List</a></li>
             <li><a href="listorder.jsp">Order List</a></li>

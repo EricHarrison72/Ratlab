@@ -55,6 +55,17 @@
 					color: #333;
 				}
 			</style>
+			<div class="header">
+				<ul class="menu">
+					<img src="img/rat.png" width = "70" height = "50" alt="Rat">
+					<li><a href="index.jsp">Shop</a></li>
+					<li><a href="listprod.jsp">Product List</a></li>
+					<li><a href="listorder.jsp">Order List</a></li>
+					<li><a href="showcart.jsp">Cart</a></li>
+					<li><a href="login.jsp">Login</a></li>
+					<li><a href="checkout.jsp">Checkout</a></li>
+				</ul>
+			</div>
 		
 </head>
 <body>
@@ -81,7 +92,7 @@
 <h4 align="center"><a href="ship.jsp?orderId=1">Test Ship orderId=1</a></h4>
 
 <h4 align="center"><a href="ship.jsp?orderId=3">Test Ship orderId=3</a></h4>
-<img src="img/rat.png" width = "800" height = "600" alt="Rat">
+
 </body>
 </head>
 
