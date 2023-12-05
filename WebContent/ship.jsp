@@ -70,6 +70,19 @@
     .logo {
         margin-right: auto;
     }
+
+    .login-button {
+        background-color: #333;
+        color: #fff;
+        padding: 14px 16px;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+
+    .login-button:hover {
+        background-color: #ddd !important;
+        color: #333 !important;
+    }
 </style>
 </head>
 <body>
@@ -82,16 +95,18 @@
             <li><a href="listprod.jsp">Product List</a></li>
             <li><a href="listorder.jsp">Order List</a></li>
             <li><a href="showcart.jsp">Cart</a></li>
-            <li><a href="login.jsp">Login</a></li>
             <li><a href="checkout.jsp">Checkout</a></li>
         </ul>
-        <% 
-        String userName = (String) session.getAttribute("authenticatedUser");
-        if (userName != null)
-            out.println("<div class='user-greeting'>Signed in as: " + userName + "</div>");
-		else
-			out.println("<div class='user-greeting'></div>");
-        %>
+        <div class="user-greeting">
+            <% 
+                String userName = (String) session.getAttribute("authenticatedUser");
+                if (userName != null) {
+                    out.println("Signed in as: " + userName);
+                } else {
+                    out.println("<a class='login-button' href='login.jsp'>Login</a>");
+                }
+            %>
+        </div>
     </div>
 
     <%

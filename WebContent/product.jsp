@@ -58,6 +58,19 @@
         h1, h2 {
             color: #333;
         }
+
+        .login-button {
+            background-color: #333;
+            color: #fff;
+            padding: 14px 16px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .login-button:hover {
+            background-color: #ddd !important;
+            color: #333 !important;
+        }
     </style>
     <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -71,16 +84,18 @@
             <li><a href="listprod.jsp">Product List</a></li>
             <li><a href="listorder.jsp">Order List</a></li>
             <li><a href="showcart.jsp">Cart</a></li>
-            <li><a href="login.jsp">Login</a></li>
             <li><a href="checkout.jsp">Checkout</a></li>
         </ul>
-        <% 
-        String userName = (String) session.getAttribute("authenticatedUser");
-        if (userName != null)
-            out.println("<div class='user-greeting'>Signed in as: " + userName + "</div>");
-		else
-			out.println("<div class='user-greeting'></div>");
-        %>
+        <div class="user-greeting">
+            <% 
+                String userName = (String) session.getAttribute("authenticatedUser");
+                if (userName != null) {
+                    out.println("Signed in as: " + userName);
+                } else {
+                    out.println("<a class='login-button' href='login.jsp'>Login</a>");
+                }
+            %>
+        </div>
     </div>
 <%
     String dbURL = "jdbc:sqlserver://cosc304_sqlserver:1433;DatabaseName=orders;TrustServerCertificate=True";
@@ -119,10 +134,10 @@
                 <p>Price: <%= NumberFormat.getCurrencyInstance().format(productPrice) %></p>
                 <p>Description: <%= productDescription %></p>
                 <%-- Display product image using productImageURL --%>
-            <img src="<%= productImageURL %>" alt="<%= productName %>" class="img-fluid">
+                <img src="<%= productImageURL %>" alt="<%= productName %>" class="img-fluid">
 
-            <%-- binary field (productImage) using displayImage.jsp --%>
-            <img src="displayImage.jsp?id=<%= productId %>" alt="<%= productName %>" class="img-fluid">
+                <%-- binary field (productImage) using displayImage.jsp --%>
+                <img src="displayImage.jsp?id=<%= productId %>" alt="<%= productName %>" class="img-fluid">
                 <%-- Add links to "Add to Cart" and "Continue Shopping" --%>
                 <p>
                     <a href="addcart.jsp?id=<%= productId %>&name=<%= URLEncoder.encode(productName, "UTF-8") %>&price=<%= productPrice %>">Add to Cart</a>
@@ -145,6 +160,7 @@
             if (conn != null) {
                 conn.close();
             }
+
         } catch (SQLException ex) {
             out.println("SQL Exception during cleanup: " + ex);
         }
@@ -152,5 +168,3 @@
 %>
 </body>
 </html>
-
-
