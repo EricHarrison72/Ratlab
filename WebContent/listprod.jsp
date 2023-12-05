@@ -3,126 +3,147 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF8"%>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Grocery</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f7f7f7;
-            margin: 0;
-            padding: 0;
-        }
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Eric's Product List</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f7f7f7;
+                margin: 0;
+                padding: 0;
+            }
+    
+            .header {
+                background-color: #333;
+                color: #fff;
+                padding: 10px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+    
+            .menu {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: #333;
+                display: flex;
+            }
+    
+            .menu li {
+                margin-right: 10px;
+            }
+    
+            .menu a {
+                display: block;
+                color: #fff;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+    
+            .menu a:hover {
+                background-color: #ddd;
+                color: #333;
+            }
+    
+            .user-greeting {
+                color: #fff;
+                margin-left: auto;
+            }
+    
+            .logo {
+                margin-right: auto;
+            }
+    
+            h1 {
+                color: #333;
+                text-align: center;
+                background-color: #333;
+                color: white;
+                padding: 10px;
+                margin: 0;
+            }
+    
+            form {
+                text-align: center;
+                margin: 20px 0;
+            }
+    
+            form input[type="text"] {
+                width: 50%;
+                padding: 5px;
+                font-size: 16px;
+                border: 1px solid #ccc;
+            }
+    
+            form input[type="submit"],
+            form input[type="reset"] {
+                background-color: #333;
+                color: white;
+                padding: 5px 7px;
+                font-size: 16px;
+                border: none;
+                cursor: pointer;
+            }
+    
+            form input[type="submit"]:hover,
+            form input[type="reset"]:hover {
+                background-color: #555;
+            }
+    
+            .product-info {
+                background-color: #fff;
+                border: 1px solid #ccc;
+                margin: 10px;
+                padding: 10px;
+            }
 
-        .header {
-            background-color: #333;
-            color: #fff;
-            padding: 10px;
-            text-align: center;
-        }
-
-        .menu {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-color: #333;
-        }
-
-        .menu li {
-            display: inline-block;
-            margin-right: 10px;
-        }
-
-        .menu a {
-            display: block;
-            color: #fff;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-        }
-
-        .menu a:hover {
-            background-color: #ddd;
-            color: #333;
-        }
-
-        h1 {
-            color: #333;
-            text-align: center;
-            background-color: #333;
-            color: white;
-            padding: 10px;
-            margin: 0;
-        }
-
-        form {
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        form input[type="text"] {
-            width: 50%;
-            padding: 5px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-        }
-
-        form input[type="submit"],
-        form input[type="reset"] {
-            background-color: #333;
-            color: white;
-            padding: 5px 7px;
-            font-size: 16px;
-            border: none;
-            cursor: pointer;
-        }
-
-        form input[type="submit"]:hover,
-        form input[type="reset"]:hover {
-            background-color: #555;
-        }
-
-        .product-info {
-            background-color: #fff;
-            border: 1px solid #ccc;
-            margin: 10px;
-            padding: 10px;
-        }
-
-        .product-link {
-            background-color: #333;
-            color: white;
-            padding: 5px 10px;
-            text-decoration: none;
-        }
-
-        .product-link:hover {
-            background-color: #555;
-        }
-    </style>
-</head>
-<body>
-    <div class="header">
-        <ul class="menu">
-            <img src="img/rat.png" width = "70" height = "50" alt="Rat">
-            <li><a href="index.jsp">Shop</a></li>
-            <li><a href="listprod.jsp">Product List</a></li>
-            <li><a href="listorder.jsp">Order List</a></li>
-            <li><a href="showcart.jsp">Cart</a></li>
-            <li><a href="login.jsp">Login</a></li>
-            <li><a href="checkout.jsp">Checkout</a></li>
-        </ul>
-    </div>
-
-    <h1>Search for the products you want to buy:</h1>
-
-    <form method="get" action="listprod.jsp">
-        <input type="text" name="productName" size="50">
-        <input type="submit" value="Submit">
-        <input type="reset" value="Reset"> (Leave blank for all products)
-    </form>
+            .product-link {
+                background-color: #333;
+                color: white;
+                padding: 5px 10px;
+                text-decoration: none;
+                margin-top: 100px; /* Adjusted margin for the "Add to Cart" button */
+            }
+    
+            .product-link:hover {
+                background-color: #555;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <div class="logo">
+                <img src="img/rat.png" width="70" height="50" alt="Rat">
+            </div>
+            <ul class="menu">
+                <li><a href="index.jsp">Shop</a></li>
+                <li><a href="listprod.jsp">Product List</a></li>
+                <li><a href="listorder.jsp">Order List</a></li>
+                <li><a href="showcart.jsp">Cart</a></li>
+                <li><a href="login.jsp">Login</a></li>
+                <li><a href="checkout.jsp">Checkout</a></li>
+            </ul>
+            <% 
+            String userName = (String) session.getAttribute("authenticatedUser");
+            if (userName != null)
+                out.println("<div class='user-greeting'>Signed in as: " + userName + "</div>");
+            else
+                out.println("<div class='user-greeting'></div>");
+            %>
+        </div>
+    
+        <h1>Search for the products you want to buy:</h1>
+    
+        <form method="get" action="listprod.jsp">
+            <input type="text" name="productName" size="50">
+            <input type="submit" value="Submit">
+            <input type="reset" value="Reset"> (Leave blank for all products)
+        </form>
 
     <%
         String dbURL = "jdbc:sqlserver://cosc304_sqlserver:1433;DatabaseName=orders;TrustServerCertificate=True";

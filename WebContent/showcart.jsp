@@ -6,101 +6,70 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF8"%>
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Your Shopping Cart</title>
-    <style>
-        /* Add your styles here to make it prettier */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f7f7f7;
-            margin: 0;
-            padding: 0;
-        }
-
-        .header {
-            background-color: #333;
-            color: #fff;
-            padding: 10px;
-            text-align: center;
-        }
-
-        .menu {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-        }
-
-        .menu li {
-            display: inline-block;
-            margin-right: 10px;
-        }
-
-        .menu a {
-            display: block;
-            color: #fff;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-        }
-
-        .menu a:hover {
-            background-color: #ddd;
-            color: #333;
-        }
-
-        h1, h2 {
-            color: #333;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #333;
-            color: #fff;
-        }
-
-        input[type="text"] {
-            width: 40px;
-            text-align: center;
-        }
-
-        input[type="submit"] {
-            background-color: #333;
-            color: #fff;
-            padding: 8px 16px;
-            border: none;
-            cursor: pointer;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #555;
-        }
-
-        a {
-            color: #333;
-            text-decoration: none;
-        }
-
-        a:hover {
-            color: #555;
-        }
-    </style>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Your Shopping Cart</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f7f7f7;
+                margin: 0;
+                padding: 0;
+            }
+    
+            .header {
+                background-color: #333;
+                color: #fff;
+                padding: 10px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+    
+            .menu {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: #333;
+                display: flex;
+            }
+    
+            .menu li {
+                margin-right: 10px;
+            }
+    
+            .menu a {
+                display: block;
+                color: #fff;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+    
+            .menu a:hover {
+                background-color: #ddd;
+                color: #333;
+            }
+    
+            .user-greeting {
+                color: #fff;
+                margin-left: auto;
+            }
+    
+            .logo {
+                margin-right: auto;
+            }
+        </style>
+    </head>
+    <body>
+    
     <div class="header">
+        <div class="logo">
+            <img src="img/rat.png" width="70" height="50" alt="Rat">
+        </div>
         <ul class="menu">
-            <img src="img/rat.png" width = "70" height = "50" alt="Rat">
             <li><a href="index.jsp">Shop</a></li>
             <li><a href="listprod.jsp">Product List</a></li>
             <li><a href="listorder.jsp">Order List</a></li>
@@ -108,6 +77,13 @@
             <li><a href="login.jsp">Login</a></li>
             <li><a href="checkout.jsp">Checkout</a></li>
         </ul>
+        <% 
+            String userName = (String) session.getAttribute("authenticatedUser");
+            if (userName != null)
+                out.println("<div class='user-greeting'>Signed in as: " + userName + "</div>");
+            else
+                out.println("<div class='user-greeting'></div>");
+        %>
     </div>
 
     <h1>Your Shopping Cart</h1>

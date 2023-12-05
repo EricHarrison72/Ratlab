@@ -1,62 +1,69 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>Login Screen</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f7f7f7;
-        margin: 0;
-        padding: 0;
-    }
-
-    .header {
-        background-color: #333;
-        color: #fff;
-        padding: 10px;
-        text-align: center;
-    }
-
-    .menu {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        background-color: #333;
-    }
-
-    .menu li {
-        display: inline-block;
-        margin-right: 10px;
-    }
-
-    .menu a {
-        display: block;
-        color: #fff;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-    }
-
-    .menu a:hover {
-        background-color: #ddd;
-        color: #333;
-    }
-
-    .main-content {
-        text-align: center;
-        margin-top: 20px;
-    }
-
-    h1, h2 {
-        color: #333;
-    }
-</style>
-</head>
-<body>
-	<div class="header">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login Page</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f7f7f7;
+                margin: 0;
+                padding: 0;
+            }
+    
+            .header {
+                background-color: #333;
+                color: #fff;
+                padding: 10px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+    
+            .menu {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: #333;
+                display: flex;
+            }
+    
+            .menu li {
+                margin-right: 10px;
+            }
+    
+            .menu a {
+                display: block;
+                color: #fff;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+    
+            .menu a:hover {
+                background-color: #ddd;
+                color: #333;
+            }
+    
+            .user-greeting {
+                color: #fff;
+                margin-left: auto;
+            }
+    
+            .logo {
+                margin-right: auto;
+            }
+        </style>
+    </head>
+    <body>
+    
+    <div class="header">
+        <div class="logo">
+            <img src="img/rat.png" width="70" height="50" alt="Rat">
+        </div>
         <ul class="menu">
-            <img src="img/rat.png" width = "70" height = "50" alt="Rat">
             <li><a href="index.jsp">Shop</a></li>
             <li><a href="listprod.jsp">Product List</a></li>
             <li><a href="listorder.jsp">Order List</a></li>
@@ -64,6 +71,13 @@
             <li><a href="login.jsp">Login</a></li>
             <li><a href="checkout.jsp">Checkout</a></li>
         </ul>
+        <% 
+            String userName = (String) session.getAttribute("authenticatedUser");
+            if (userName != null)
+                out.println("<div class='user-greeting'>Signed in as: " + userName + "</div>");
+            else
+                out.println("<div class='user-greeting'></div>");
+        %>
     </div>
 
 <div style="margin:0 auto;text-align:center;display:inline">

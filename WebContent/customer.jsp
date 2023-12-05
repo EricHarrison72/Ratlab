@@ -34,7 +34,9 @@
             background-color: #333;
             color: #fff;
             padding: 10px;
-            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .menu {
@@ -71,10 +73,22 @@
         h1, h2 {
             color: #333;
         }
+
+        .user-greeting {
+            color: #fff;
+            margin-left: auto;
+        }
+
+        .logo {
+            margin-right: auto;
+        }
     </style>
 </head>
 <body>
     <div class="header">
+        <div class="logo">
+            <img src="img/rat.png" width="70" height="50" alt="Rat">
+        </div>
         <ul class="menu">
             <li><a href="index.jsp">Shop</a></li>
             <li><a href="listprod.jsp">Product List</a></li>
@@ -83,6 +97,13 @@
             <li><a href="login.jsp">Login</a></li>
             <li><a href="checkout.jsp">Checkout</a></li>
         </ul>
+        <% 
+        String userName = (String) session.getAttribute("authenticatedUser");
+        if (userName != null)
+            out.println("<div class='user-greeting'>Signed in as: " + userName + "</div>");
+		else
+			out.println("<div class='user-greeting'></div>");
+    %>
     </div>
 
    
