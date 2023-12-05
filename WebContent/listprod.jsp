@@ -156,8 +156,12 @@
         <form method="get" action="listprod.jsp">
             <select name="category">
                 <option value="" selected>All Categories</option>
-                <option value="Rats">Electronics</option>
-                <option value="More rats">Clothing</option>
+                <option value="Pets">Pets</option>
+                <option value="Pests">Pests</option>
+                <option value="Wild">Wild</option>
+                <option value="Food">Food</option>
+                <option value="Test Subjects">Test Subjects</option>
+                <option value="New York">New York</option>
                 <!-- The catagory drop down doesn't do anything atm -->
             </select>
             <input type="text" name="productName" size="50">
