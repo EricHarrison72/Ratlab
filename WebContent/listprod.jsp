@@ -107,7 +107,6 @@
                 color: white;
                 padding: 5px 10px;
                 text-decoration: none;
-                margin-top: 100px; /* Adjusted margin for the "Add to Cart" button */
             }
     
             .product-link:hover {
@@ -155,6 +154,12 @@
         <h1>Search for the products you want to buy:</h1>
     
         <form method="get" action="listprod.jsp">
+            <select name="category">
+                <option value="" selected>All Categories</option>
+                <option value="Rats">Electronics</option>
+                <option value="More rats">Clothing</option>
+                <!-- The catagory drop down doesn't do anything atm -->
+            </select>
             <input type="text" name="productName" size="50">
             <input type="submit" value="Submit">
             <input type="reset" value="Reset"> (Leave blank for all products)
