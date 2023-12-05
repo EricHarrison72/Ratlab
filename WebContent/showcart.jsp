@@ -7,39 +7,33 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Your Shopping Cart</title>
         <style>
+            /* Add your styles here to make it prettier */
             body {
                 font-family: Arial, sans-serif;
                 background-color: #f7f7f7;
                 margin: 0;
                 padding: 0;
             }
-    
             .header {
                 background-color: #333;
-                color: #fff;
-                padding: 10px;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             }
-    
             .menu {
                 list-style-type: none;
                 margin: 0;
                 padding: 0;
                 overflow: hidden;
-                background-color: #333;
-                display: flex;
             }
-    
             .menu li {
+                display: inline-block;
                 margin-right: 10px;
             }
-    
             .menu a {
                 display: block;
                 color: #fff;
@@ -47,19 +41,47 @@
                 padding: 14px 16px;
                 text-decoration: none;
             }
-    
             .menu a:hover {
                 background-color: #ddd;
                 color: #333;
             }
-    
-            .user-greeting {
-                color: #fff;
-                margin-left: auto;
+            h1, h2 {
+                color: #333;
             }
-    
-            .logo {
-                margin-right: auto;
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 20px;
+            }
+            th, td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+            th {
+                background-color: #333;
+                color: #fff;
+            }
+            input[type="text"] {
+                width: 40px;
+                text-align: center;
+            }
+            input[type="submit"] {
+                background-color: #333;
+                color: #fff;
+                padding: 8px 16px;
+                border: none;
+                cursor: pointer;
+            }
+            input[type="submit"]:hover {
+                background-color: #555;
+            }
+            a {
+                color: #333;
+                text-decoration: none;
+            }
+            a:hover {
+                color: #555;
             }
         </style>
     </head>
