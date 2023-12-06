@@ -169,28 +169,45 @@
             <input type="reset" value="Reset"> (Leave blank for all products)
         </form>
 
-    <%
+        <%
         String dbURL = "jdbc:sqlserver://cosc304_sqlserver:1433;DatabaseName=orders;TrustServerCertificate=True";
         String dbUser = "sa";
         String dbPassword = "304#sa#pw";
-
+    
         // Get product name to search for
         String name = request.getParameter("productName");
-
+    
+        // Get category from drop down
+        String category = request.getParameter("category");
+    
         // Initialize connection and result set
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-
+    
         try {
             // Make the connection
             conn = DriverManager.getConnection(dbURL, dbUser, dbPassword);
-
+    
             // Variable name now contains the search string the user entered
             // Use it to build a query and print out the resultset.  Make sure to use PreparedStatement!
-            String query = "SELECT * FROM product WHERE productName LIKE ?";
+            String query = "SELECT * FROM product LEFT JOIN category ON product.categoryId = category.categoryId WHERE productName LIKE ?";
+    
+            // Append category filter to the query if a category is selected
+            if (category != null && !category.isEmpty()) {
+                query += " AND categoryName = ?";
+            }
+    
             pstmt = conn.prepareStatement(query);
+    
+            // Set parameters after creating the PreparedStatement
             pstmt.setString(1, "%" + name + "%");
+    
+            // Set category parameter if applicable
+            if (category != null && !category.isEmpty()) {
+                pstmt.setString(2, category);
+            }
+    
             rs = pstmt.executeQuery();
 
             // Print out the ResultSet
@@ -198,6 +215,9 @@
                 int productId = rs.getInt("productId");
                 String productName = rs.getString("productName");
                 double productPrice = rs.getDouble("productPrice");
+
+                // Retrieve category
+                String productCategory = rs.getString("categoryName");
 
                 // Create a link to go to the product detail page
                 String productDetailLink = "product.jsp?id=" + productId;
@@ -208,6 +228,7 @@
                 <div class="product-info">
                     <p>
                         Product Name: <a class="product-link" href="<%= productDetailLink %>"><%= productName %></a><br>
+                        Category: <%= productCategory %><br>
                         Price: <%= productPrice %><br>
                         <a class="product-link" href="<%= addCartLink %>">Add to Cart</a>
                     </p>
