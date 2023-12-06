@@ -139,6 +139,23 @@ while (rs.next()) {
 
 </table>
 
+<div class="main-content">
+    <h2>Add New Product</h2>
+
+    <form method="post" action="processAddProduct.jsp" enctype="multipart/form-data">
+        <label for="productName">Product Name:</label>
+        <input type="text" name="productName" required><br>
+
+        <label for="productDesc">Product Description:</label>
+        <textarea name="productDesc" required></textarea><br>
+
+        <label for="categoryId">Category ID:</label>
+        <input type="text" name="categoryId" required><br>
+
+
+        <input type="submit" value="Add Product">
+    </form>
+
 <%
 } catch (SQLException ex) {
     out.println("Error retrieving total sales: " + ex.getMessage());
