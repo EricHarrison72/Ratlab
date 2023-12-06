@@ -106,7 +106,9 @@
     %>
     </div>
 
-   
+    <div style="display: flex; justify-content: space-around;">
+    <div style="flex: 1; padding: 20px;">
+
     <% 
     authenticated = session.getAttribute("authenticatedUser") == null ? false : true;
         if (!authenticated) {
@@ -133,15 +135,78 @@
                     // Display customer information in a table
                     out.println("<table>");
                     
-                    out.println("<tr><td>First Name</td><td>" + rs.getString("FirstName") + "</td></tr>");
-                    out.println("<tr><td>Last Name</td><td>" + rs.getString("LastName") + "</td></tr>");
-                    out.println("<tr><td>Email</td><td>" + rs.getString("Email") + "</td></tr>");
-                    out.println("<tr><td>Phone</td><td>" + rs.getString("PhoneNum") + "</td></tr>");
-                    out.println("<tr><td>Address</td><td>" + rs.getString("Address") + "</td></tr>");
-					out.println("<tr><td>City</td><td>" + rs.getString("city") + "</td></tr>");
-					out.println("<tr><td>State</td><td>" + rs.getString("state") + "</td></tr>");
-					out.println("<tr><td>Postal Code</td><td>" + rs.getString("postalCode") + "</td></tr>");
-					out.println("<tr><td>Country</td><td>" + rs.getString("Country") + "</td></tr>");
+                        // Update first name form
+                        out.println("<form action='updateCustomer.jsp' method='post'>");
+                        out.println("<tr><td>First Name</td><td>" + rs.getString("FirstName") + "</td><td>");
+                        out.println("<input type='text' name='firstName' value=''>");
+                        out.println("<input type='hidden' name='userId' value='" + rs.getString("userid") + "'>");
+                        out.println("<input type='submit' value='Update'>");
+                        out.println("</form>");
+
+                        // Update last name form
+                        out.println("<form action='updateCustomer.jsp' method='post'>");
+                        out.println("<tr><td>Last Name</td><td>" + rs.getString("LastName") + "</td><td>");
+                        out.println("<input type='text' name='lastName' value=''>");
+                        out.println("<input type='hidden' name='userId' value='" + rs.getString("userid") + "'>");
+                        out.println("<input type='submit' value='Update'>");
+                        out.println("</form>");
+
+                        // Update email form
+                        out.println("<form action='updateCustomer.jsp' method='post'>");
+                        out.println("<tr><td>Email</td><td>" + rs.getString("Email") + "</td><td>");
+                        out.println("<input type='text' name='Email' value=''>");
+                        out.println("<input type='hidden' name='userId' value=''>");
+                        out.println("<input type='submit' value='Update'>");
+                        out.println("</form>");
+
+                        // Update Phonenumber form
+                        out.println("<form action='updateCustomer.jsp' method='post'>");
+                        out.println("<tr><td>Phone</td><td>" + rs.getString("PhoneNum") + "</td><td>");
+                        out.println("<input type='text' name='PhoneNum' value=''>");
+                        out.println("<input type='hidden' name='userId' value=''>");
+                        out.println("<input type='submit' value='Update'>");
+                        out.println("</form>");
+
+                        // Update Address form
+                        out.println("<form action='updateCustomer.jsp' method='post'>");
+                        out.println("<tr><td>Address</td><td>" + rs.getString("Address") + "</td><td>");
+                        out.println("<input type='text' name='Address' value=''>");
+                        out.println("<input type='hidden' name='userId' value=''>");
+                        out.println("<input type='submit' value='Update'>");
+                        out.println("</form>");
+
+                        // Update City form
+                        out.println("<form action='updateCustomer.jsp' method='post'>");
+                        out.println("<tr><td>City</td><td>" + rs.getString("City") + "</td><td>");
+                        out.println("<input type='text' name='City' value=''>");
+                        out.println("<input type='hidden' name='userId' value=''>");
+                        out.println("<input type='submit' value='Update'>");
+                        out.println("</form>");
+
+                        // Update State form
+                        out.println("<form action='updateCustomer.jsp' method='post'>");
+                        out.println("<tr><td>State</td><td>" + rs.getString("state") + "</td><td>");
+                        out.println("<input type='text' name='state' value=''>");
+                        out.println("<input type='hidden' name='userId' value=''>");
+                        out.println("<input type='submit' value='Update'>");
+                        out.println("</form>");
+
+                        // Update Postal Code form
+                        out.println("<form action='updateCustomer.jsp' method='post'>");
+                        out.println("<tr><td>Postal Code</td><td>" + rs.getString("postalCode") + "</td><td>");
+                        out.println("<input type='text' name='postalCode' value=''>");
+                        out.println("<input type='hidden' name='userId' value=''>");
+                        out.println("<input type='submit' value='Update'>");
+                        out.println("</form>");
+
+                        // Update Country form
+                        out.println("<form action='updateCustomer.jsp' method='post'>");
+                        out.println("<tr><td>Country</td><td>" + rs.getString("Country") + "</td><td>");
+                        out.println("<input type='text' name='Country' value=''>");
+                        out.println("<input type='hidden' name='userId' value=''>");
+                        out.println("<input type='submit' value='Update'>");
+                        out.println("</form>");
+
 					out.println("<tr><td>Username</td><td>" + rs.getString("userid") + "</td></tr>");
                     out.println("</table>");
                 } else {
