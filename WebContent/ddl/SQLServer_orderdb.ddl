@@ -151,7 +151,7 @@ INSERT INTO category(categoryName) VALUES ('Food');
 INSERT INTO category(categoryName) VALUES ('Test Subjects');
 INSERT INTO category(categoryName) VALUES ('New York');
 
-INSERT product(productName, categoryId, productDesc, productPrice) VALUES ('Fancy Rat', 1, 'A distinguished gentleman',20.00);
+INSERT product(productName, categoryId, productDesc, productPrice) VALUES ('Fancy Rat with Chai', 1, 'A distinguished gentleman',20.00);
 INSERT product(productName, categoryId, productDesc, productPrice) VALUES ('Dumbo Rat',1,'Kind of an idiot',14.00);
 INSERT product(productName, categoryId, productDesc, productPrice) VALUES ('Hairless Rat',1,'Yuck',1.00);
 INSERT product(productName, categoryId, productDesc, productPrice) VALUES ('Blue Rat',1,'Not to be confused with Red Rat',25.00);
