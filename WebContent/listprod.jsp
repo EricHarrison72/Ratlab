@@ -152,17 +152,17 @@
         </div>
     
         <h1>Search for the products you want to buy:</h1>
-    
+
         <form method="get" action="listprod.jsp">
             <select name="category">
                 <option value="" selected>All Categories</option>
-                <option value="Pets">Pets</option>
-                <option value="Pests">Pests</option>
-                <option value="Wild">Wild</option>
-                <option value="Food">Food</option>
-                <option value="Test Subjects">Test Subjects</option>
-                <option value="New York">New York</option>
-                <!-- The catagory drop down doesn't do anything atm -->
+                <option value="Beverages">Beverages</option>
+                <option value="Condiments">Condiments</option>
+                <option value="Produce">Produce</option>
+                <option value="Meat/Poultry">Meat/Poultry</option>
+                <option value="Seafood">Seafood</option>
+                <option value="Confections">Confections</option>
+                <option value="Grains/Cereals">Grains/Cereals</option>
             </select>
             <input type="text" name="productName" size="50">
             <input type="submit" value="Submit">
