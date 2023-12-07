@@ -97,24 +97,21 @@
             <li><a href="checkout.jsp">Checkout</a></li>
         </ul>
         <% 
-        String userName = (String) session.getAttribute("authenticatedUser");
-        if (userName != null)
-            out.println("<div class='user-greeting'>Signed in as: " + userName + "</div>");
-		else
-			out.println("<div class='user-greeting'></div>");
-    %>
+            String userName = (String) session.getAttribute("authenticatedUser");
+            if (userName != null)
+                out.println("<div class='user-greeting'>Signed in as: " + userName + "</div>");
+            else
+                out.println("<div class='user-greeting'></div>");
+        %>
     </div>
 
     <div style="display: flex; justify-content: space-around;">
     <div style="flex: 1; padding: 20px;">
 
-    <% 
-    authenticated = session.getAttribute("authenticatedUser") == null ? false : true;
-        if (!authenticated) {
-            String loginMessage = "You have not been authorized to access the URL " + request.getRequestURL().toString();
-            session.setAttribute("loginMessage", loginMessage);
-            response.sendRedirect("login.jsp");   } 
-        else {
+        <%
+        authenticated = session.getAttribute("authenticatedUser") == null ? false : true;
+    
+        if (authenticated) {
             String currentUser = (String) session.getAttribute("authenticatedUser");
            
             // TODO: Retrieve and display customer information by username
