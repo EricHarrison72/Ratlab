@@ -68,7 +68,6 @@
             <li><a href="listprod.jsp">Product List</a></li>
             <li><a href="listorder.jsp">Order List</a></li>
             <li><a href="showcart.jsp">Cart</a></li>
-            <li><a href="login.jsp">Login</a></li>
             <li><a href="checkout.jsp">Checkout</a></li>
             <li><a href="register.html">Create Account</a></li>
         </ul>
