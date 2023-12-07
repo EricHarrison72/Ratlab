@@ -134,10 +134,10 @@
                 <p>Price: <%= NumberFormat.getCurrencyInstance().format(productPrice) %></p>
                 <p>Description: <%= productDescription %></p>
                 <!-- Display product image using productImageURL -->
-                <img src="<%= productImageURL %>" alt="<%= productName %>" class="img-fluid">
+                <img src="<%= productImageURL %>" class="img-fluid">
 
                 <!-- Binary field (productImage) using displayImage.jsp -->
-                <img src="displayImage.jsp?id=<%= productId %>" alt="<%= productName %>" class="img-fluid">
+                <img src="displayImage.jsp?id=<%= productId %>" class="img-fluid">
 
                 <!-- Add links to "Add to Cart" and "Continue Shopping" -->
                 <p>
