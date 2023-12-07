@@ -43,7 +43,7 @@
             PreparedStatement updateLastNameStmt = con.prepareStatement(updateLastNameSql);
             updateLastNameStmt.setString(1, lastName);
             updateLastNameStmt.setString(2, userId);
-            int rowsUpdated = updateLastNameStmt.executeUpdate();
+             int rowsUpdated = updateLastNameStmt.executeUpdate();
             if (rowsUpdated > 0) {
                 isUpdated = true;
             }

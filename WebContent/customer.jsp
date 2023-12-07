@@ -154,7 +154,7 @@
                         out.println("<form action='updateCustomer.jsp' method='post'>");
                         out.println("<tr><td>Email</td><td>" + rs.getString("Email") + "</td><td>");
                         out.println("<input type='text' name='Email' value=''>");
-                        out.println("<input type='hidden' name='userId' value=''>");
+                        out.println("<input type='hidden' name='userId' value='" + rs.getString("userid") + "'>");
                         out.println("<input type='submit' value='Update'>");
                         out.println("</form>");
 
@@ -162,7 +162,7 @@
                         out.println("<form action='updateCustomer.jsp' method='post'>");
                         out.println("<tr><td>Phone</td><td>" + rs.getString("PhoneNum") + "</td><td>");
                         out.println("<input type='text' name='PhoneNum' value=''>");
-                        out.println("<input type='hidden' name='userId' value=''>");
+                        out.println("<input type='hidden' name='userId' value='" + rs.getString("userid") + "'>");
                         out.println("<input type='submit' value='Update'>");
                         out.println("</form>");
 
@@ -170,7 +170,7 @@
                         out.println("<form action='updateCustomer.jsp' method='post'>");
                         out.println("<tr><td>Address</td><td>" + rs.getString("Address") + "</td><td>");
                         out.println("<input type='text' name='Address' value=''>");
-                        out.println("<input type='hidden' name='userId' value=''>");
+                        out.println("<input type='hidden' name='userId' value='" + rs.getString("userid") + "'>");
                         out.println("<input type='submit' value='Update'>");
                         out.println("</form>");
 
@@ -178,7 +178,7 @@
                         out.println("<form action='updateCustomer.jsp' method='post'>");
                         out.println("<tr><td>City</td><td>" + rs.getString("City") + "</td><td>");
                         out.println("<input type='text' name='City' value=''>");
-                        out.println("<input type='hidden' name='userId' value=''>");
+                        out.println("<input type='hidden' name='userId' value='" + rs.getString("userid") + "'>");
                         out.println("<input type='submit' value='Update'>");
                         out.println("</form>");
 
@@ -186,7 +186,7 @@
                         out.println("<form action='updateCustomer.jsp' method='post'>");
                         out.println("<tr><td>State</td><td>" + rs.getString("state") + "</td><td>");
                         out.println("<input type='text' name='state' value=''>");
-                        out.println("<input type='hidden' name='userId' value=''>");
+                        out.println("<input type='hidden' name='userId' value='" + rs.getString("userid") + "'>");
                         out.println("<input type='submit' value='Update'>");
                         out.println("</form>");
 
@@ -194,7 +194,7 @@
                         out.println("<form action='updateCustomer.jsp' method='post'>");
                         out.println("<tr><td>Postal Code</td><td>" + rs.getString("postalCode") + "</td><td>");
                         out.println("<input type='text' name='postalCode' value=''>");
-                        out.println("<input type='hidden' name='userId' value=''>");
+                        out.println("<input type='hidden' name='userId' value='" + rs.getString("userid") + "'>");
                         out.println("<input type='submit' value='Update'>");
                         out.println("</form>");
 
@@ -202,12 +202,16 @@
                         out.println("<form action='updateCustomer.jsp' method='post'>");
                         out.println("<tr><td>Country</td><td>" + rs.getString("Country") + "</td><td>");
                         out.println("<input type='text' name='Country' value=''>");
-                        out.println("<input type='hidden' name='userId' value=''>");
+                        out.println("<input type='hidden' name='userId' value='" + rs.getString("userid") + "'>");
                         out.println("<input type='submit' value='Update'>");
                         out.println("</form>");
 
 					out.println("<tr><td>Username</td><td>" + rs.getString("userid") + "</td></tr>");
                     out.println("</table>");
+
+                    // Link to change password, sends userId
+                    out.println("<tr><td colspan='3'><a href='changePassword.jsp?userId=" + rs.getString("userid") + "'>Change Password</a></td></tr>");
+
                 } else {
                     out.println("<p>Error: Customer information not found for user " + currentUser + "</p>");
                 }
