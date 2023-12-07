@@ -172,15 +172,16 @@ while (rs.next()) {
         <label for="paroductPrice">Product Price:</label>
         <input type="text" name="productPrice" required><br>
 
+        <label for="category">Category:</label>
             <select name="category">
             <option value="Pets">Pets</option>
             <option value="Pests">Pests</option>
             <option value="Wild">Wild</option>
             <option value="Food">Food</option>
             <option value="Test Subjects">Test Subjects</option>
-            <option value="New York">New York</option>
+            <option value="New York">New York</option></select><br>
 
-
+        
         <input type="submit" value="Add Product">
     </form>
 
