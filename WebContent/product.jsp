@@ -141,7 +141,7 @@
 
                 <!-- Add links to "Add to Cart" and "Continue Shopping" -->
                 <p>
-                    <a href="addcart.jsp?id=<%= productId %>&                    name=<%= URLEncoder.encode(productName, "UTF-8") %>&price=<%= productPrice %>">Add to Cart</a>
+                    <a href="addcart.jsp?id=<%= productId %>&name=<%= URLEncoder.encode(productName, "UTF-8") %>&price=<%= productPrice %>">Add to Cart</a>
                     | <a href="listprod.jsp">Continue Shopping</a>
                 </p>
 

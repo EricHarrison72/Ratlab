@@ -94,16 +94,12 @@ boolean authenticated = session.getAttribute("authenticatedUser") == null ? fals
 if (!authenticated)
 {
     String loginMessage = "You have not been authorized to access the URL " + request.getRequestURL().toString();
-    session.setAttribute("loginMessage", loginMessage);
+    //session.setAttribute("loginMessage", loginMessage);
     response.sendRedirect("login.jsp"); 
  } else {
         String currentUser = (String) session.getAttribute("authenticatedUser");
    
 
-// Write SQL query to print out total order amount by day
-String sql = "SELECT (orderDate) AS orderDay, SUM(totalAmount) AS totalSales "
-           + "FROM ordersummary "
-           + "GROUP BY (orderDate)";
 try {
     
  
@@ -112,6 +108,30 @@ try {
         String dbPass = "304#sa#pw";
         Connection con = DriverManager.getConnection(dbURL, dbUser, dbPass);
     
+
+        
+        // SQL query to check if user has admin permissions
+        String adminSQL = "SELECT isAdmin FROM customer WHERE userId = ?";
+        PreparedStatement adminStmt = con.prepareStatement(adminSQL);
+        adminStmt.setString(1, currentUser);
+        ResultSet adminRS = adminStmt.executeQuery();
+
+        boolean admin = false;
+        if (adminRS.next()) {
+            int isAdmin = adminRS.getInt("isAdmin");
+            admin = (isAdmin == 1);
+        }
+
+        if(!admin) {
+            String loginMessage = "You have not been authorized to access the URL " + request.getRequestURL().toString();
+            session.setAttribute("loginMessage", loginMessage);
+            response.sendRedirect("login.jsp"); 
+        }
+        // Write SQL query to print out total order amount by day
+        String sql = "SELECT (orderDate) AS orderDay, SUM(totalAmount) AS totalSales "
+                   + "FROM ordersummary "
+                   + "GROUP BY (orderDate)";
+
     PreparedStatement stmt = con.prepareStatement(sql);
     ResultSet rs = stmt.executeQuery();
 %>

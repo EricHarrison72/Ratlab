@@ -113,8 +113,9 @@
         if (!authenticated) {
             String loginMessage = "You have not been authorized to access the URL " + request.getRequestURL().toString();
             session.setAttribute("loginMessage", loginMessage);
-            response.sendRedirect("login.jsp");   } else {
-         String currentUser = (String) session.getAttribute("authenticatedUser");
+            response.sendRedirect("login.jsp");   } 
+        else {
+            String currentUser = (String) session.getAttribute("authenticatedUser");
            
             // TODO: Retrieve and display customer information by username
             String sql = "SELECT * FROM Customer WHERE userId = ?";
