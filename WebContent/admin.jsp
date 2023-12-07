@@ -5,7 +5,7 @@
 <title>Administrator Page</title>
 <style>
     body {
-        font-family: Arial, sans-serif;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         background-color: #f7f7f7;
         margin: 0;
         padding: 0;
@@ -13,11 +13,16 @@
 
     .header {
         background-color: #333;
-            color: #fff;
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        color: #fff;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo img {
+        width: 70px;
+        height: 50px;
     }
 
     .menu {
@@ -26,6 +31,7 @@
         padding: 0;
         overflow: hidden;
         background-color: #333;
+        text-align: center; /* Center the menu items */
     }
 
     .menu li {
@@ -48,7 +54,7 @@
 
     .main-content {
         text-align: center;
-        margin-top: 20px;
+        margin: 20px;
     }
 
     h1, h2 {
@@ -60,10 +66,69 @@
         margin-left: auto;
     }
 
-    .logo {
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #333;
+        color: #fff;
+    }
+
+    form {
+        margin-top: 20px;
+        max-width: 400px;
+        margin-left: auto;
         margin-right: auto;
+        text-align: left;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input, textarea, select {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+    }
+
+    input[type="submit"], button {
+        background-color: #333;
+        color: #fff;
+        padding: 10px;
+        border: none;
+        cursor: pointer;
+    }
+
+    input[type="submit"]:hover, button:hover {
+        background-color: #555;
+    }
+
+    p {
+        margin-top: 20px;
+    }
+
+    a {
+        color: #333;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
     }
 </style>
+
 </head>
 <body>
     <div class="header">
@@ -136,6 +201,50 @@ try {
     ResultSet rs = stmt.executeQuery();
 %>
 
+<%
+// Write SQL query to retrieve all customers
+String customerQuery = "SELECT * FROM customer";
+PreparedStatement customerStmt = con.prepareStatement(customerQuery);
+ResultSet customerRS = customerStmt.executeQuery();
+%>
+
+<div class="main-content">
+    <h2>All Customers</h2>
+
+    <table border="1">
+        <tr>
+            <th>User ID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Is Admin</th>
+        </tr>
+
+        <%
+        while (customerRS.next()) {
+            String userId = customerRS.getString("userId");
+            String name = customerRS.getString("firstName") + " " + customerRS.getString("lastName");
+            String email = customerRS.getString("email");
+            int isAdmin = customerRS.getInt("isAdmin");
+        %>
+        <tr>
+            <td><%= userId %></td>
+            <td><%= name %></td>
+            <td><%= email %></td>
+            <td><%= (isAdmin == 1) ? "Yes" : "No" %></td>
+        </tr>
+        <%
+        }
+        %>
+
+    </table>
+</div>
+
+<%
+// Close the customer result set and statement
+customerRS.close();
+customerStmt.close();
+%>
+
 <table border="1">
     <tr>
         <th>Day</th>
@@ -186,50 +295,10 @@ while (rs.next()) {
     </form>
 
 
-    <p><a href='updateProducts.jsp'>Update Products</a></p>
+    <button onclick="window.location.href='updateProducts.jsp'">Update Products</button>
 
-        <%
-// Write SQL query to retrieve all customers
-String customerQuery = "SELECT * FROM customer";
-PreparedStatement customerStmt = con.prepareStatement(customerQuery);
-ResultSet customerRS = customerStmt.executeQuery();
-%>
-
-<div class="main-content">
-    <h2>All Customers</h2>
-
-    <table border="1">
-        <tr>
-            <th>User ID</th>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Is Admin</th>
-        </tr>
-
-        <%
-        while (customerRS.next()) {
-            String userId = customerRS.getString("userId");
-            String name = customerRS.getString("firstName") + " " + customerRS.getString("lastName");
-            String email = customerRS.getString("email");
-            int isAdmin = customerRS.getInt("isAdmin");
-        %>
-        <tr>
-            <td><%= userId %></td>
-            <td><%= name %></td>
-            <td><%= email %></td>
-            <td><%= (isAdmin == 1) ? "Yes" : "No" %></td>
-        </tr>
-        <%
-        }
-        %>
-
-    </table>
-</div>
 
 <%
-// Close the customer result set and statement
-customerRS.close();
-customerStmt.close();
 } catch (SQLException ex) {
     out.println("Error retrieving total sales: " + ex.getMessage());
 } 
