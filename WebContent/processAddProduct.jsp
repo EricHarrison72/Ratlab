@@ -18,6 +18,8 @@
     int categoryId = (categoryIdParam != null && !categoryIdParam.isEmpty()) ?
             Integer.parseInt(categoryIdParam) : 1; // Default to 1 or another suitable default value
 
+
+            
     try {
         String dbURL = "jdbc:sqlserver://cosc304_sqlserver:1433;DatabaseName=orders;TrustServerCertificate=True";
         String dbUser = "sa";
@@ -33,6 +35,8 @@
             stmt.setInt(4, categoryId);
        
             stmt.executeUpdate();
+
+            
         }
 
         con.close();

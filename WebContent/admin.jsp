@@ -142,15 +142,23 @@ while (rs.next()) {
 <div class="main-content">
     <h2>Add New Product</h2>
 
-    <form method="post" action="processAddProduct.jsp" enctype="multipart/form-data">
+    <form method="post" action="processAddProduct.jsp">
         <label for="productName">Product Name:</label>
         <input type="text" name="productName" required><br>
 
         <label for="productDesc">Product Description:</label>
         <textarea name="productDesc" required></textarea><br>
+        
+        <label for="paroductPrice">Product Price:</label>
+        <input type="text" name="productPrice" required><br>
 
-        <label for="categoryId">Category ID:</label>
-        <input type="text" name="categoryId" required><br>
+            <select name="category">
+            <option value="Pets">Pets</option>
+            <option value="Pests">Pests</option>
+            <option value="Wild">Wild</option>
+            <option value="Food">Food</option>
+            <option value="Test Subjects">Test Subjects</option>
+            <option value="New York">New York</option>
 
 
         <input type="submit" value="Add Product">
