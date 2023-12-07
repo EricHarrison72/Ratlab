@@ -164,6 +164,8 @@ while (rs.next()) {
         <input type="submit" value="Add Product">
     </form>
 
+
+    <p><a href='updateProducts.jsp'>Update Products
 <%
 } catch (SQLException ex) {
     out.println("Error retrieving total sales: " + ex.getMessage());
