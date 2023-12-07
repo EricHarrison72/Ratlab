@@ -141,30 +141,71 @@
 
                 <!-- Add links to "Add to Cart" and "Continue Shopping" -->
                 <p>
-                    <a href="addcart.jsp?id=<%= productId %>&name=<%= URLEncoder.encode(productName, "UTF-8") %>&price=<%= productPrice %>">Add to Cart</a>
+                    <a href="addcart.jsp?id=<%= productId %>&                    name=<%= URLEncoder.encode(productName, "UTF-8") %>&price=<%= productPrice %>">Add to Cart</a>
                     | <a href="listprod.jsp">Continue Shopping</a>
                 </p>
 
-              <!-- Review Form -->
-<h3>Write a Review</h3>
-<form action="processReview.jsp" method="post">
-    <input type="hidden" name="productId" value="<%= productId %>">
+                <!-- Review Form -->
+                <h3>Write a Review</h3>
+                <form action="processReview.jsp" method="post">
+                    <input type="hidden" name="productId" value="<%= productId %>">
+    
+                    <label for="rating">Rating:</label>
+                    <select name="rating" id="rating">
+                        <option value="1">1 (Poor)</option>
+                        <option value="2">2 (Fair)</option>
+                        <option value="3">3 (Average)</option>
+                        <option value="4">4 (Good)</option>
+                        <option value="5">5 (Excellent)</option>
+                    </select><br>
+    
+                    <label for="comment">Comment:</label><br>
+                    <textarea name="comment" id="comment" rows="4" cols="50"></textarea><br>
+    
+                    <input type="submit" value="Submit Review">
+                </form>
 
-
-    <label for="rating">Rating:</label>
-    <select name="rating" id="rating">
-        <option value="1">1 (Poor)</option>
-        <option value="2">2 (Fair)</option>
-        <option value="3">3 (Average)</option>
-        <option value="4">4 (Good)</option>
-        <option value="5">5 (Excellent)</option>
-    </select><br>
-
-    <label for="comment">Comment:</label><br>
-    <textarea name="comment" id="comment" rows="4" cols="50"></textarea><br>
-
-    <input type="submit" value="Submit Review">
-</form>
+                <!-- Display Warehouse and Inventory Information -->
+                <div class="mt-4">
+                    <h3>Warehouse and Inventory Information</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Warehouse</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% 
+                                // Retrieve warehouse and inventory information using PreparedStatement
+                                String warehouseQuery = "SELECT w.warehouseName, pi.quantity, pi.price " +
+                                                      "FROM warehouse w " +
+                                                      "JOIN productInventory pi ON w.warehouseId = pi.warehouseId " +
+                                                      "WHERE pi.productId = ?";
+                                try (PreparedStatement warehouseStmt = conn.prepareStatement(warehouseQuery)) {
+                                    warehouseStmt.setString(1, productId);
+                                    ResultSet warehouseRs = warehouseStmt.executeQuery();
+    
+                                    while (warehouseRs.next()) {
+                                        String warehouseName = warehouseRs.getString("warehouseName");
+                                        int quantity = warehouseRs.getInt("quantity");
+                                        double price = warehouseRs.getDouble("price");
+                            %>
+                                        <tr>
+                                            <td><%= warehouseName %></td>
+                                            <td><%= quantity %></td>
+                                            <td><%= NumberFormat.getCurrencyInstance().format(price) %></td>
+                                        </tr>
+                            <%
+                                    }
+                                } catch (SQLException ex) {
+                                    out.println("SQL Exception while fetching warehouse info: " + ex);
+                                }
+                            %>
+                        </tbody>
+                    </table>
+                </div>
 
                 <!-- Display Reviews -->
                 <div class="mt-4">
