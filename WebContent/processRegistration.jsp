@@ -31,20 +31,19 @@ try {
     }
 
     // Insert the new customer with the incremented customerId
-    String sql = "INSERT INTO customer (customerId, firstName, lastName, email, phonenum, address, city, state, postalCode, country, userId, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    String sql = "INSERT INTO customer (firstName, lastName, email, phonenum, address, city, state, postalCode, country, userId, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     PreparedStatement statement = conn.prepareStatement(sql);
-    statement.setInt(1, nextCustomerId);
-    statement.setString(2, firstName);
-    statement.setString(3, lastName);
-    statement.setString(4, email);
-    statement.setString(5, phonenum);
-    statement.setString(6, address);
-    statement.setString(7, city);
-    statement.setString(8, state);
-    statement.setString(9, postalCode);
-    statement.setString(10, country);
-    statement.setString(11, userId);
-    statement.setString(12, password);
+    statement.setString(1, firstName);
+    statement.setString(2, lastName);
+    statement.setString(3, email);
+    statement.setString(4, phonenum);
+    statement.setString(5, address);
+    statement.setString(6, city);
+    statement.setString(7, state);
+    statement.setString(8, postalCode);
+    statement.setString(9, country);
+    statement.setString(10, userId);
+    statement.setString(11, password);
 
     int rowsInserted = statement.executeUpdate();
 
