@@ -186,8 +186,50 @@ while (rs.next()) {
     </form>
 
 
-    <p><a href='updateProducts.jsp'>Update Products
+    <p><a href='updateProducts.jsp'>Update Products</a></p>
+
+        <%
+// Write SQL query to retrieve all customers
+String customerQuery = "SELECT * FROM customer";
+PreparedStatement customerStmt = con.prepareStatement(customerQuery);
+ResultSet customerRS = customerStmt.executeQuery();
+%>
+
+<div class="main-content">
+    <h2>All Customers</h2>
+
+    <table border="1">
+        <tr>
+            <th>User ID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Is Admin</th>
+        </tr>
+
+        <%
+        while (customerRS.next()) {
+            String userId = customerRS.getString("userId");
+            String name = customerRS.getString("firstName") + " " + customerRS.getString("lastName");
+            String email = customerRS.getString("email");
+            int isAdmin = customerRS.getInt("isAdmin");
+        %>
+        <tr>
+            <td><%= userId %></td>
+            <td><%= name %></td>
+            <td><%= email %></td>
+            <td><%= (isAdmin == 1) ? "Yes" : "No" %></td>
+        </tr>
+        <%
+        }
+        %>
+
+    </table>
+</div>
+
 <%
+// Close the customer result set and statement
+customerRS.close();
+customerStmt.close();
 } catch (SQLException ex) {
     out.println("Error retrieving total sales: " + ex.getMessage());
 } 
