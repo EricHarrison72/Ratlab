@@ -49,6 +49,31 @@ try (
     return;
 }
 
+// Check for an existing review for the given customerId and productId
+String checkReviewQuery = "SELECT * FROM review WHERE customerId = ? AND productId = ?";
+boolean existingReview = false;
+
+try (
+    Connection connection = DriverManager.getConnection(dbURL, dbUser, dbPassword);
+    PreparedStatement checkReviewStmt = connection.prepareStatement(checkReviewQuery)) {
+
+    checkReviewStmt.setInt(1, customerId);
+    checkReviewStmt.setInt(2, Integer.parseInt(productId));
+    ResultSet existingReviewRs = checkReviewStmt.executeQuery();
+
+    existingReview = existingReviewRs.next();
+} catch (SQLException ex) {
+    out.println("<h2>Error checking for existing reviews. Please try again.</h2>");
+    ex.printStackTrace();
+    return;
+}
+
+// If an existing review is found, display an error message
+if (existingReview) {
+    out.println("<h2>You have already submitted a review for this product.</h2>");
+    return;
+}
+
 // Check for null values
 if (customerId <= 0 || productId == null) {
     out.println("<h2>Invalid request. Please try again.</h2>");
