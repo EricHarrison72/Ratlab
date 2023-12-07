@@ -149,6 +149,8 @@
             response.sendRedirect("customer.jsp");
         } else {
             out.println("<p>No records were updated</p>");
+            // Add a link back to customer.jsp
+            out.println("<p><a href='customer.jsp'>Go back to customer.jsp</a></p>");
         }
 
         // Close the resources
