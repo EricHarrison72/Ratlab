@@ -145,48 +145,54 @@
                     | <a href="listprod.jsp">Continue Shopping</a>
                 </p>
 
-                <!-- Review Form -->
-                <h3>Write a Review</h3>
-                <form action="processReview.jsp" method="post">
-                    <input type="hidden" name="productId" value="<%= productId %>">
-                    <label for="rating">Rating:</label>
-                    <select name="rating" id="rating">
-                        <option value="1">1 (Poor)</option>
-                        <option value="2">2 (Fair)</option>
-                        <option value="3">3 (Average)</option>
-                        <option value="4">4 (Good)</option>
-                        <option value="5">5 (Excellent)</option>
-                    </select><br>
-                    <label for="comment">Comment:</label><br>
-                    <textarea name="comment" id="comment" rows="4" cols="50"></textarea><br>
-                    <input type="submit" value="Submit Review">
-                </form>
+              <!-- Review Form -->
+<h3>Write a Review</h3>
+<form action="processReview.jsp" method="post">
+    <input type="hidden" name="productId" value="<%= productId %>">
+
+
+    <label for="rating">Rating:</label>
+    <select name="rating" id="rating">
+        <option value="1">1 (Poor)</option>
+        <option value="2">2 (Fair)</option>
+        <option value="3">3 (Average)</option>
+        <option value="4">4 (Good)</option>
+        <option value="5">5 (Excellent)</option>
+    </select><br>
+
+    <label for="comment">Comment:</label><br>
+    <textarea name="comment" id="comment" rows="4" cols="50"></textarea><br>
+
+    <input type="submit" value="Submit Review">
+</form>
 
                 <!-- Display Reviews -->
-                <h3>Customer Reviews</h3>
-                <%
-                    String reviewQuery = "SELECT r.reviewRating, r.reviewDate, c.firstName, c.lastName, r.reviewComment FROM review r JOIN customer c ON r.customerId = c.customerId WHERE r.productId = ?";
-                    try (PreparedStatement reviewStmt = conn.prepareStatement(reviewQuery)) {
-                        reviewStmt.setString(1, productId);
-                        ResultSet reviewRs = reviewStmt.executeQuery();
+                <div class="mt-4">
+                    <h3>Customer Reviews</h3>
+                    <%
+                        String reviewQuery = "SELECT r.reviewRating, r.reviewDate, c.firstName, c.lastName, r.reviewComment FROM review r JOIN customer c ON r.customerId = c.customerId WHERE r.productId = ?";
+                        try (PreparedStatement reviewStmt = conn.prepareStatement(reviewQuery)) {
+                            reviewStmt.setString(1, productId);
+                            ResultSet reviewRs = reviewStmt.executeQuery();
 
-                        while (reviewRs.next()) {
-                            int reviewRating = reviewRs.getInt("reviewRating");
-                            String reviewDate = reviewRs.getString("reviewDate");
-                            String customerName = reviewRs.getString("firstName") + " " + reviewRs.getString("lastName");
-                            String reviewComment = reviewRs.getString("reviewComment");
-                %>
-                            <div>
-                                <p><strong><%= customerName %></strong> - <%= reviewDate %></p>
-                                <p>Rating: <%= reviewRating %>/5</p>
-                                <p><%= reviewComment %></p>
-                            </div>
-                <%
+                            while (reviewRs.next()) {
+                                int reviewRating = reviewRs.getInt("reviewRating");
+                                Timestamp reviewDate = reviewRs.getTimestamp("reviewDate");
+                                String customerName = reviewRs.getString("firstName") + " " + reviewRs.getString("lastName");
+                                String reviewComment = reviewRs.getString("reviewComment");
+                    %>
+                                <div class="border p-3 mb-3">
+                                    <p><strong><%= customerName %></strong> - <%= reviewDate.toLocalDateTime().toLocalDate() %></p>
+                                    <p>Rating: <%= reviewRating %>/5</p>
+                                    <p><%= reviewComment %></p>
+                                </div>
+                    <%
+                            }
+                        } catch (SQLException ex) {
+                            out.println("SQL Exception while fetching reviews: " + ex);
                         }
-                    } catch (SQLException ex) {
-                        out.println("SQL Exception while fetching reviews: " + ex);
-                    }
-                %>
+                    %>
+                </div>
             </div>
 <%
         }
@@ -204,7 +210,6 @@
             if (conn != null) {
                 conn.close();
             }
-
         } catch (SQLException ex) {
             out.println("SQL Exception during cleanup: " + ex);
         }
@@ -212,3 +217,4 @@
 %>
 </body>
 </html>
+
